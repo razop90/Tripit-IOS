@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>851997878839-9siptlot0s3k18hahjgeoal3rabd9fin.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.851997878839-9siptlot0s3k18hahjgeoal3rabd9fin</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCiNwZsQ_dEcQdqo_sZvw18__xDPvXwQi8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>851997878839</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ra.Tripit</string>
+	<key>PROJECT_ID</key>
+	<string>tripit-65d75</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tripit-65d75.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:851997878839:ios:5bb33603e3034fb2</string>
+	<key>DATABASE_URL</key>
+	<string>https://tripit-65d75.firebaseio.com</string>
+</dict>
+</plist>

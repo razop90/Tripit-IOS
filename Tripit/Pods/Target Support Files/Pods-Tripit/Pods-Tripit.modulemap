@@ -1,0 +1,6 @@
+framework module Pods_Tripit {
+  umbrella header "Pods-Tripit-umbrella.h"
+
+  export *
+  module * { export * }
+}
