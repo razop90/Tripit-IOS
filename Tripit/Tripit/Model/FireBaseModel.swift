@@ -8,5 +8,10 @@
 
 import Foundation
 
+class FirebaseModel {
+    
+
+}
+
 
 

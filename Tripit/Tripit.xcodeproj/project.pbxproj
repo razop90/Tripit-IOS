@@ -20,9 +20,11 @@
 		820D19C421B2D96B0026655D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 820D19C221B2D96B0026655D /* LaunchScreen.storyboard */; };
 		820D19CF21B2D96B0026655D /* TripitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820D19CE21B2D96B0026655D /* TripitTests.swift */; };
 		820D19DA21B2D96B0026655D /* TripitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820D19D921B2D96B0026655D /* TripitUITests.swift */; };
+		8243A36621BAD6E4001C7108 /* MainDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8243A36521BAD6E4001C7108 /* MainDisplayController.swift */; };
 		82AEE2BF21BAA04B008A01B8 /* ImageSelection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82AEE2BE21BAA04B008A01B8 /* ImageSelection.storyboard */; };
 		82AEE2C321BAA5E1008A01B8 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C221BAA5E1008A01B8 /* MainNavigationController.swift */; };
 		82AEE2C521BAA97B008A01B8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */; };
+		82AEE2C721BACB48008A01B8 /* AddPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C621BACB48008A01B8 /* AddPostController.swift */; };
 		8F0E6C355206F9995738A368 /* Pods_TripitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A07C4DA03A8F4A8B2F0BEC8 /* Pods_TripitTests.framework */; };
 		91BD72149699C207B18F8B5A /* Pods_Tripit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D374EF9D380A63858D0350C4 /* Pods_Tripit.framework */; };
 /* End PBXBuildFile section */
@@ -65,9 +67,11 @@
 		820D19D521B2D96B0026655D /* TripitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		820D19D921B2D96B0026655D /* TripitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripitUITests.swift; sourceTree = "<group>"; };
 		820D19DB21B2D96B0026655D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8243A36521BAD6E4001C7108 /* MainDisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDisplayController.swift; sourceTree = "<group>"; };
 		82AEE2BE21BAA04B008A01B8 /* ImageSelection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ImageSelection.storyboard; path = Views/ImageSelection.storyboard; sourceTree = "<group>"; };
 		82AEE2C221BAA5E1008A01B8 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		82AEE2C621BACB48008A01B8 /* AddPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostController.swift; sourceTree = "<group>"; };
 		B13A167F51A75F3ABD2CD690 /* Pods-TripitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripitUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TripitUITests/Pods-TripitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C5EBE020E594CC1D0FA7820C /* Pods-TripitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TripitTests/Pods-TripitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D374EF9D380A63858D0350C4 /* Pods_Tripit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tripit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +205,8 @@
 			children = (
 				82AEE2C221BAA5E1008A01B8 /* MainNavigationController.swift */,
 				82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */,
+				82AEE2C621BACB48008A01B8 /* AddPostController.swift */,
+				8243A36521BAD6E4001C7108 /* MainDisplayController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -442,10 +448,12 @@
 				82093AC821BA823D000B9DF3 /* FirebaseModel.swift in Sources */,
 				82093AC421BA81AE000B9DF3 /* Model.swift in Sources */,
 				82AEE2C321BAA5E1008A01B8 /* MainNavigationController.swift in Sources */,
+				8243A36621BAD6E4001C7108 /* MainDisplayController.swift in Sources */,
 				820D19BA21B2D96A0026655D /* AppDelegate.swift in Sources */,
 				82AEE2C521BAA97B008A01B8 /* LoginViewController.swift in Sources */,
 				82093ACE21BA8744000B9DF3 /* Consts.swift in Sources */,
 				82093ACC21BA84D9000B9DF3 /* ImageUploadManager.swift in Sources */,
+				82AEE2C721BACB48008A01B8 /* AddPostController.swift in Sources */,
 				82093ACA21BA8288000B9DF3 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
