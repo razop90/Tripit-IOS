@@ -6,8 +6,13 @@ target 'Tripit' do
   use_frameworks!
 
   # Pods for Tripit
+pod 'Firebase/Auth'
+pod 'Firebase/Core'
+pod 'Firebase/Database'
+pod 'Firebase/Storage'
 
-  target 'TripitTests' do
+
+target 'TripitTests' do
     inherit! :search_paths
     # Pods for testing
   end

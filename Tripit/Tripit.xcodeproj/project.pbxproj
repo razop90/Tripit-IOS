@@ -9,13 +9,20 @@
 /* Begin PBXBuildFile section */
 		2468AE010E14D56EF684CD51 /* Pods_TripitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8634E08C753A9DB56AED36E /* Pods_TripitUITests.framework */; };
 		8207C23021B4781F000197D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8207C22F21B4781F000197D5 /* GoogleService-Info.plist */; };
+		82093AC421BA81AE000B9DF3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82093AC321BA81AE000B9DF3 /* Model.swift */; };
+		82093AC821BA823D000B9DF3 /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82093AC721BA823D000B9DF3 /* FirebaseModel.swift */; };
+		82093ACA21BA8288000B9DF3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82093AC921BA8288000B9DF3 /* Post.swift */; };
+		82093ACC21BA84D9000B9DF3 /* ImageUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82093ACB21BA84D9000B9DF3 /* ImageUploadManager.swift */; };
+		82093ACE21BA8744000B9DF3 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82093ACD21BA8744000B9DF3 /* Consts.swift */; };
 		820D19BA21B2D96A0026655D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820D19B921B2D96A0026655D /* AppDelegate.swift */; };
-		820D19BC21B2D96A0026655D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820D19BB21B2D96A0026655D /* ViewController.swift */; };
 		820D19BF21B2D96A0026655D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 820D19BD21B2D96A0026655D /* Main.storyboard */; };
 		820D19C121B2D96B0026655D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 820D19C021B2D96B0026655D /* Assets.xcassets */; };
 		820D19C421B2D96B0026655D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 820D19C221B2D96B0026655D /* LaunchScreen.storyboard */; };
 		820D19CF21B2D96B0026655D /* TripitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820D19CE21B2D96B0026655D /* TripitTests.swift */; };
 		820D19DA21B2D96B0026655D /* TripitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820D19D921B2D96B0026655D /* TripitUITests.swift */; };
+		82AEE2BF21BAA04B008A01B8 /* ImageSelection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82AEE2BE21BAA04B008A01B8 /* ImageSelection.storyboard */; };
+		82AEE2C321BAA5E1008A01B8 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C221BAA5E1008A01B8 /* MainNavigationController.swift */; };
+		82AEE2C521BAA97B008A01B8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */; };
 		8F0E6C355206F9995738A368 /* Pods_TripitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A07C4DA03A8F4A8B2F0BEC8 /* Pods_TripitTests.framework */; };
 		91BD72149699C207B18F8B5A /* Pods_Tripit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D374EF9D380A63858D0350C4 /* Pods_Tripit.framework */; };
 /* End PBXBuildFile section */
@@ -41,9 +48,13 @@
 		5A07C4DA03A8F4A8B2F0BEC8 /* Pods_TripitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TripitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		763EABBF2E2A3312D50C6CB9 /* Pods-TripitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TripitTests/Pods-TripitTests.release.xcconfig"; sourceTree = "<group>"; };
 		8207C22F21B4781F000197D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		82093AC321BA81AE000B9DF3 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		82093AC721BA823D000B9DF3 /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
+		82093AC921BA8288000B9DF3 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		82093ACB21BA84D9000B9DF3 /* ImageUploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadManager.swift; sourceTree = "<group>"; };
+		82093ACD21BA8744000B9DF3 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		820D19B621B2D96A0026655D /* Tripit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tripit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		820D19B921B2D96A0026655D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		820D19BB21B2D96A0026655D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		820D19BE21B2D96A0026655D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		820D19C021B2D96B0026655D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		820D19C321B2D96B0026655D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +65,9 @@
 		820D19D521B2D96B0026655D /* TripitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		820D19D921B2D96B0026655D /* TripitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripitUITests.swift; sourceTree = "<group>"; };
 		820D19DB21B2D96B0026655D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82AEE2BE21BAA04B008A01B8 /* ImageSelection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ImageSelection.storyboard; path = Views/ImageSelection.storyboard; sourceTree = "<group>"; };
+		82AEE2C221BAA5E1008A01B8 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B13A167F51A75F3ABD2CD690 /* Pods-TripitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripitUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TripitUITests/Pods-TripitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C5EBE020E594CC1D0FA7820C /* Pods-TripitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TripitTests/Pods-TripitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D374EF9D380A63858D0350C4 /* Pods_Tripit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tripit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,13 +153,18 @@
 		820D19B821B2D96A0026655D /* Tripit */ = {
 			isa = PBXGroup;
 			children = (
+				82AEE2C121BAA5B7008A01B8 /* Controllers */,
+				82AEE2C021BAA0B9008A01B8 /* Views */,
+				82093ACB21BA84D9000B9DF3 /* ImageUploadManager.swift */,
+				82104E6F21B8005F00302AC9 /* Model */,
 				820D19B921B2D96A0026655D /* AppDelegate.swift */,
-				820D19BB21B2D96A0026655D /* ViewController.swift */,
 				820D19BD21B2D96A0026655D /* Main.storyboard */,
 				820D19C021B2D96B0026655D /* Assets.xcassets */,
 				820D19C221B2D96B0026655D /* LaunchScreen.storyboard */,
 				8207C22F21B4781F000197D5 /* GoogleService-Info.plist */,
 				820D19C521B2D96B0026655D /* Info.plist */,
+				82093ACD21BA8744000B9DF3 /* Consts.swift */,
+				82AEE2BE21BAA04B008A01B8 /* ImageSelection.storyboard */,
 			);
 			path = Tripit;
 			sourceTree = "<group>";
@@ -166,6 +185,33 @@
 				820D19DB21B2D96B0026655D /* Info.plist */,
 			);
 			path = TripitUITests;
+			sourceTree = "<group>";
+		};
+		82104E6F21B8005F00302AC9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				82093AC321BA81AE000B9DF3 /* Model.swift */,
+				82093AC721BA823D000B9DF3 /* FirebaseModel.swift */,
+				82093AC921BA8288000B9DF3 /* Post.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		82AEE2C021BAA0B9008A01B8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		82AEE2C121BAA5B7008A01B8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				82AEE2C221BAA5E1008A01B8 /* MainNavigationController.swift */,
+				82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +324,7 @@
 			files = (
 				820D19C421B2D96B0026655D /* LaunchScreen.storyboard in Resources */,
 				8207C23021B4781F000197D5 /* GoogleService-Info.plist in Resources */,
+				82AEE2BF21BAA04B008A01B8 /* ImageSelection.storyboard in Resources */,
 				820D19C121B2D96B0026655D /* Assets.xcassets in Resources */,
 				820D19BF21B2D96A0026655D /* Main.storyboard in Resources */,
 			);
@@ -331,6 +378,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Tripit/Pods-Tripit-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -339,6 +387,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -399,8 +448,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				820D19BC21B2D96A0026655D /* ViewController.swift in Sources */,
+				82093AC821BA823D000B9DF3 /* FirebaseModel.swift in Sources */,
+				82093AC421BA81AE000B9DF3 /* Model.swift in Sources */,
+				82AEE2C321BAA5E1008A01B8 /* MainNavigationController.swift in Sources */,
 				820D19BA21B2D96A0026655D /* AppDelegate.swift in Sources */,
+				82AEE2C521BAA97B008A01B8 /* LoginViewController.swift in Sources */,
+				82093ACE21BA8744000B9DF3 /* Consts.swift in Sources */,
+				82093ACC21BA84D9000B9DF3 /* ImageUploadManager.swift in Sources */,
+				82093ACA21BA8288000B9DF3 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
