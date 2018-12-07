@@ -154,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				82AEE2C121BAA5B7008A01B8 /* Controllers */,
-				82AEE2C021BAA0B9008A01B8 /* Views */,
 				82093ACB21BA84D9000B9DF3 /* ImageUploadManager.swift */,
 				82104E6F21B8005F00302AC9 /* Model */,
 				820D19B921B2D96A0026655D /* AppDelegate.swift */,
@@ -195,14 +194,6 @@
 				82093AC921BA8288000B9DF3 /* Post.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		82AEE2C021BAA0B9008A01B8 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Views;
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		82AEE2C121BAA5B7008A01B8 /* Controllers */ = {
