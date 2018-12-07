@@ -11,9 +11,10 @@ import Firebase
 import FirebaseStorage
 
 
-class ImageUploadManager: NSObject {
+class ImageUploadManager : NSObject {
     
-    func UploadImage(_ image:UIImage, progressBlock: @escaping (_ presentage: Double) -> Void, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?)->Void){
+    func UploadImage(_ image:UIImage, progressBlock: @escaping (_ presentage: Double) -> Void, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void) -> URL? {
+        var returnedURL: URL? = nil
         let storage = Storage.storage() //The birebase storage object
         let storageReference = storage.reference() //The firebase storage reference
         
@@ -29,10 +30,11 @@ class ImageUploadManager: NSObject {
             let uploadTask = imageReference.putData(imageData, metadata: metadata, completion: { (metadata, error) in
                 if metadata != nil {
                     imageReference.downloadURL{ url, error in
-                        //Returning the URL and reurn errors if exist
+                        //Returning the URL and return errors if exist
                         completionBlock(url, error?.localizedDescription)
+                        returnedURL = url
                     }
-                }else{
+                } else {
                     //No URL was found
                     completionBlock(nil, error?.localizedDescription)
                 }
@@ -47,10 +49,11 @@ class ImageUploadManager: NSObject {
                 let precentage = (Double(progress.completedUnitCount) / Double(progress.totalUnitCount)) * 100
                 progressBlock(precentage)
             })
-        }else{
+        } else {
             completionBlock(nil, "Image couldn't be converted to Data.")
         }
         
+        return returnedURL
     }
 
 }

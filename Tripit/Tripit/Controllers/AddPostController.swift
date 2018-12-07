@@ -12,6 +12,7 @@ import UIKit
 class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var BuisyIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,9 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(AddPostController.tapDetected))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(singleTap)
+        
+        BuisyIndicator.isHidden = true
+        //Progress.isHidden = true
     }
     
     @objc func tapDetected(){
@@ -33,14 +37,30 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         UploadPost()
     }
     
+    @IBOutlet weak var Progress: UIProgressView!
+    
     private func TryUploadImage(_ image:UIImage) {
+        BuisyIndicator.startAnimating()
+        BuisyIndicator.isHidden = false
+        //Progress.isHidden = false
+        view.isUserInteractionEnabled = false
+        
         //Creating an instance of the uploadManager and uploading the picture
         let imageUploadManager = ImageUploadManager()
+        //var imageUrl: URL? = nil
         imageUploadManager.UploadImage(image, progressBlock: { (precentage) in
+            //self.Progress.progress = Float(precentage) / 100
             print(precentage) //Printing the upload precentage
         }, { (fileURL, errorMessage) in
+            //imageUrl = fileURL
+            
             print(fileURL ?? "no URL was found")
             print(errorMessage ?? "no error exist")
+            
+            self.BuisyIndicator.isHidden = true
+            self.BuisyIndicator.stopAnimating()
+            //self.Progress.isHidden = true
+            self.view.isUserInteractionEnabled = true
             
             self.dismiss(animated: true, completion: nil)
         })
@@ -49,6 +69,8 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     func UploadPost() {
         if let image = imageView.image {
             TryUploadImage(image)
+            
+            
         }
     }
     

@@ -90,7 +90,23 @@
                                         <color key="textColor" red="0.99992352724075317" green="1" blue="0.99988299608230591" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8Nq-re-KlR">
+                                        <rect key="frame" x="112" y="276.33333333333331" width="150" height="1.6666666666666665"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="progressTintColor" red="0.18138276521328725" green="0.16446073852517684" blue="0.56555361675126903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="trackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </progressView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hMJ-CI-cPs">
+                                        <rect key="frame" x="169" y="240" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
+                                    </activityIndicatorView>
                                 </subviews>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="8Nq-re-KlR"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJ7-73-JuE">
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -123,6 +139,8 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="BuisyIndicator" destination="hMJ-CI-cPs" id="iz7-2v-ldG"/>
+                        <outlet property="Progress" destination="8Nq-re-KlR" id="4Vz-zE-BcH"/>
                         <outlet property="imageView" destination="Qlv-SG-ScV" id="Xb2-5S-K26"/>
                     </connections>
                 </viewController>
