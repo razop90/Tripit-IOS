@@ -13,8 +13,6 @@ import FirebaseStorage
 
 class ImageUploadManager: NSObject {
     
-    static let imagesFolderPath: String="postsImages"
-    
     func UploadImage(_ image:UIImage, progressBlock: @escaping (_ presentage: Double) -> Void, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?)->Void){
         let storage = Storage.storage() //The birebase storage object
         let storageReference = storage.reference() //The firebase storage reference
