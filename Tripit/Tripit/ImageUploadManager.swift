@@ -13,8 +13,8 @@ import FirebaseStorage
 
 class ImageUploadManager : NSObject {
     
-    func UploadImage(_ image:UIImage, progressBlock: @escaping (_ presentage: Double) -> Void, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void) -> URL? {
-        var returnedURL: URL? = nil
+    func UploadImage(_ image:UIImage, progressBlock: @escaping (_ presentage: Double) -> Void, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void) -> Void {
+        //var returnedURL: URL? = nil
         let storage = Storage.storage() //The birebase storage object
         let storageReference = storage.reference() //The firebase storage reference
         
@@ -32,7 +32,7 @@ class ImageUploadManager : NSObject {
                     imageReference.downloadURL{ url, error in
                         //Returning the URL and return errors if exist
                         completionBlock(url, error?.localizedDescription)
-                        returnedURL = url
+                        //returnedURL = url
                     }
                 } else {
                     //No URL was found
@@ -53,7 +53,7 @@ class ImageUploadManager : NSObject {
             completionBlock(nil, "Image couldn't be converted to Data.")
         }
         
-        return returnedURL
+        //return returnedURL
     }
 
 }

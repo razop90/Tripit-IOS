@@ -10,6 +10,7 @@ import Foundation
 
 struct Consts{
     struct Posts {
+        static let PostsTableName: String = "Posts"
         static let ImagesFolderName: String = "ImagesStorage"
     }
 }
