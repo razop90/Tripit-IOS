@@ -25,7 +25,6 @@
 		82AEE2C321BAA5E1008A01B8 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C221BAA5E1008A01B8 /* MainNavigationController.swift */; };
 		82AEE2C521BAA97B008A01B8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */; };
 		82AEE2C721BACB48008A01B8 /* AddPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C621BACB48008A01B8 /* AddPostController.swift */; };
-		84BDB9EE21BECEDA0083417A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDB9ED21BECEDA0083417A /* RegisterViewController.swift */; };
 		8F0E6C355206F9995738A368 /* Pods_TripitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A07C4DA03A8F4A8B2F0BEC8 /* Pods_TripitTests.framework */; };
 		91BD72149699C207B18F8B5A /* Pods_Tripit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D374EF9D380A63858D0350C4 /* Pods_Tripit.framework */; };
 /* End PBXBuildFile section */
@@ -73,7 +72,6 @@
 		82AEE2C221BAA5E1008A01B8 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		82AEE2C621BACB48008A01B8 /* AddPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostController.swift; sourceTree = "<group>"; };
-		84BDB9ED21BECEDA0083417A /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		B13A167F51A75F3ABD2CD690 /* Pods-TripitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripitUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TripitUITests/Pods-TripitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C5EBE020E594CC1D0FA7820C /* Pods-TripitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TripitTests/Pods-TripitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D374EF9D380A63858D0350C4 /* Pods_Tripit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tripit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,7 +207,6 @@
 				82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */,
 				82AEE2C621BACB48008A01B8 /* AddPostController.swift */,
 				8243A36521BAD6E4001C7108 /* MainDisplayController.swift */,
-				84BDB9ED21BECEDA0083417A /* RegisterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -286,7 +283,6 @@
 				TargetAttributes = {
 					820D19B521B2D96A0026655D = {
 						CreatedOnToolsVersion = 10.0;
-						LastSwiftMigration = 1000;
 					};
 					820D19C921B2D96B0026655D = {
 						CreatedOnToolsVersion = 10.0;
@@ -450,7 +446,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				82093AC821BA823D000B9DF3 /* FirebaseModel.swift in Sources */,
-				84BDB9EE21BECEDA0083417A /* RegisterViewController.swift in Sources */,
 				82093AC421BA81AE000B9DF3 /* Model.swift in Sources */,
 				82AEE2C321BAA5E1008A01B8 /* MainNavigationController.swift in Sources */,
 				8243A36621BAD6E4001C7108 /* MainDisplayController.swift in Sources */,
@@ -635,7 +630,6 @@
 			baseConfigurationReference = E80903F8A4C462DB96FA232B /* Pods-Tripit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L6968S5FSB;
 				INFOPLIST_FILE = Tripit/Info.plist;
@@ -645,7 +639,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ra.Tripit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -656,7 +649,6 @@
 			baseConfigurationReference = ED942653BD18A652C68C54DF /* Pods-Tripit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L6968S5FSB;
 				INFOPLIST_FILE = Tripit/Info.plist;
