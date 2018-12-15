@@ -14,8 +14,9 @@ class Post {
     let userID:String
     let location:String
     let description:String
-    var image:UIImage?
+    var creationDate:String
     var imageUrl:String?
+    var likes:Int
     
     init(_userID:String, _id:String, _location:String, _description:String, _imageUrl:String? = nil){
         id = _id
@@ -23,17 +24,20 @@ class Post {
         location = _location
         description = _description
         imageUrl = _imageUrl
-        image = nil
-        loadImage()
+        likes = 0
+        creationDate = ""
+        creationDate = getNowDate()
     }
     
-    init(_userID:String, _id:String, _location:String, _description:String, _image:UIImage? = nil){
+    init(_userID:String, _id:String, _location:String, _description:String){
         id = _id
         userID = _userID
         location = _location
         description = _description
-        image = _image
         imageUrl = nil
+        likes = 0
+        creationDate = ""
+        creationDate = getNowDate()
     }
     
     init(json:[String:Any]) {
@@ -42,7 +46,8 @@ class Post {
         location = json["location"] as! String
         description = json["description"] as! String
         imageUrl = json["imageUrl"] as? String
-        image = nil
+        likes = json["likes"] as! Int
+        creationDate = json["creationData"] as! String
     }
     
     func toJson() -> [String:Any] {
@@ -52,17 +57,20 @@ class Post {
         json["location"] = location
         json["description"] = description
         json["imageUrl"] = imageUrl ?? ""
+        json["likes"] = likes
+        json["creationData"] = creationDate
 
         return json
     }
     
-    private func loadImage(){
-        if let imageUrl = self.imageUrl{
-            //load here
-        }
+     private func getNowDate() -> String {
+        let df = DateFormatter()
+        df.dateFormat = "yyy/MM/dd HH:mm:ss"
+        let now = df.string(from: Date())
+        
+        return now
     }
 }
-
 
 
 

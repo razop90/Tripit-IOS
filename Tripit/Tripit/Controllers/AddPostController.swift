@@ -54,8 +54,8 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         self.view.isUserInteractionEnabled = false
 
         let postId:String = "\(Date().timeIntervalSince1970)" //Temp id for the post
-        let post = Post(_userID: "1234", _id: postId, _location: LocationText.text!, _description: DescriptionText.text!, _image: image)
-            Model.instance.addNewPost(post: post, progressBlock: { (precentage) in
+        let post = Post(_userID: "1234", _id: postId, _location: LocationText.text!, _description: DescriptionText.text!)
+            Model.instance.addNewPost(post, image, progressBlock: { (precentage) in
                 //self.Progress.progress = Float(precentage) / 100
                 print(precentage) //Printing the upload precentage
             }, { (fileURL, errorMessage) in
