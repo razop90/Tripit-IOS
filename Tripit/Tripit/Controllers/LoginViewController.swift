@@ -24,15 +24,12 @@ class LoginViewController : UIViewController {
         //let ref = Database.database().reference()
         //ref.child("test33").setValue("te55544555")
     }
-    
+       
     @IBAction func OnLoginSubmit(_ sender: Any) {
         //Add login validation before the navigation function below
-        navigateToMainInterface()
+          navigateToMainInterface()
     }
     
-    @IBAction func OnSignupSubmit(_ sender: Any) {
-        //Add signup logic here
-    }
     
     private func navigateToMainInterface(){
         //bundle is the place where all of the app's assets and source codes lived in before they compiled
