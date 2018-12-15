@@ -17,13 +17,15 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var likesCounter: UILabel!
     @IBOutlet var descriptionText: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
         self.profileImage.layer.borderWidth = 3.0
+        
+       
         //self.profileImage.layer.borderColor = bordercolo
     }
     

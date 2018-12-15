@@ -42,7 +42,7 @@ class  MainDisplayController : UIViewController, UITableViewDelegate, UITableVie
         let post = posts[indexPath.row]
         cell.locationText.text = post.location
         cell.descriptionText.text = post.description
-        cell.likesCounter.text = String(post.likes)
+        cell.likesCounter.text = String(post.likes.count)        
         
         //cell.profileImage?.image = UIImage(named: "default_profile2.jpg")
         if post.imageUrl != "" {

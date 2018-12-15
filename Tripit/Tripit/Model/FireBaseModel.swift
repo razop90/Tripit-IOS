@@ -38,9 +38,9 @@ class FirebaseModel {
         })
     }
     
-    func addNewPost(_ post:Post, _ image:UIImage, progressBlock: @escaping (_ presentage: Double) -> Void = {_ in}, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void = {_,_  in}){
-        if let new_image:UIImage = image {
-            uploadImage(new_image, progressBlock:progressBlock, { (fileURL, errorMessage) in
+    func addNewPost(_ post:Post, _ image:UIImage?, progressBlock: @escaping (_ presentage: Double) -> Void = {_ in}, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void = {_,_  in}){
+        if image != nil {
+            uploadImage(image!, progressBlock:progressBlock, { (fileURL, errorMessage) in
                 
                 print(fileURL ?? "no URL was found")
                 print(errorMessage ?? "no error exist")
