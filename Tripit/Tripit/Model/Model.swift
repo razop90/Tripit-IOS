@@ -7,23 +7,19 @@
 //
 
 import Foundation
+import UIKit
 
 class Model {
     static let instance:Model = Model()
-    let postsListNotification = "com.menachi.postslist"
+    
     var firebaseModel = FirebaseModel();
-    let imageUploadManager = ImageUploadManager()
     
     private init(){
     }
     
-    
     func getAllPosts() {
         firebaseModel.getAllPosts(callback: {(data:[Post]) in
-            NotificationCenter.default.post(name: NSNotification.Name(self.postsListNotification),
-                                            object: self,
-                                            userInfo: ["data":data])
-            
+            NotificationModel.postsListNotification.notify(data: data)            
         })
     }
     
@@ -32,14 +28,18 @@ class Model {
         //return Student.getAll(database: modelSql!.database);
     }
     
-    func addNewPost(post:Post, progressBlock: @escaping (_ presentage: Double) -> Void = {_ in}, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void = {_,_  in}){
-        firebaseModel.addNewPost(post: post, progressBlock: progressBlock, completionBlock);
+    func addNewPost(_ post:Post, _ image:UIImage, progressBlock: @escaping (_ presentage: Double) -> Void = {_ in}, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void = {_,_  in}){
+        firebaseModel.addNewPost(post, image, progressBlock: progressBlock, completionBlock);
         //Student.addNew(database: mo delSql!.database, student: student)
     }
     
     func getPost(byId:String)->Post?{
         return firebaseModel.getPost(byId:byId)
         //return Student.get(database: modelSql!.database, byId: byId);
+    }
+    
+    func getImage(url:String, callback:@escaping (UIImage?)->Void){
+        firebaseModel.getImage(url: url, callback: callback)
     }
 }
 
