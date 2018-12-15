@@ -33,7 +33,15 @@ class Model {
         //Student.addNew(database: mo delSql!.database, student: student)
     }
     
-    func getPost(byId:String)->Post?{
+    func addComment(_ postId:String, _ comment:Post.Comment) {
+        firebaseModel.addComment(postId, comment)
+    }
+    
+    func addLike(_ postId:String, _ userId:String) {
+        firebaseModel.addLike(postId, userId)
+    }
+    
+    func getPost(_ byId:String)->Post?{
         return firebaseModel.getPost(byId:byId)
         //return Student.get(database: modelSql!.database, byId: byId);
     }

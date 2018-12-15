@@ -62,6 +62,13 @@ class FirebaseModel {
         return nil
     }
     
+    func addComment(_ postId:String, _ comment:Post.Comment) {
+        
+    }
+    
+    func addLike(_ postId:String, _ userId:String) {
+        
+    }
     
     func uploadImage(_ image:UIImage, progressBlock: @escaping (_ presentage: Double) -> Void, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void) -> Void {
         //var returnedURL: URL? = nil
