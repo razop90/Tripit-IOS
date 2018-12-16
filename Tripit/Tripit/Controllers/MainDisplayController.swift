@@ -43,4 +43,23 @@ class  MainDisplayController : UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
+    @IBAction func onCommentSubmit(_ sender: Any) {
+
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let commentsController = segue.destination as! CommentsController
+        
+        let buttonPosition = (sender as AnyObject).convert(CGPoint(), to:postsTableView)
+        let indexPath = postsTableView.indexPathForRow(at:buttonPosition)
+        let post =  posts[(indexPath?.row)!]
+        
+        commentsController.comments = post.comments
+
+    }
+    
+    @IBAction func onLikeSubmit(_ sender: Any) {
+        
+    }
 }

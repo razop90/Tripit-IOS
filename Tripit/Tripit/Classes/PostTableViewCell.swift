@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PostTableViewCell: UITableViewCell {
+class PostTableViewCell : UITableViewCell {
    
     @IBOutlet var userNameText: UILabel!
     @IBOutlet var locationText: UILabel!    
