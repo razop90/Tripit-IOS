@@ -31,6 +31,6 @@ class CommentViewCell : UITableViewCell {
     public func setCommentData(_ comment:Post.Comment) {
         commentText.text = comment.comment
         userNameText.text = comment.userId
-        timeText.text = "3"
+        timeText.text = comment.creationDate
     }
 }

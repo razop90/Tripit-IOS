@@ -11,13 +11,36 @@ import UIKit
 
 class CommentsController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
-     var comments = [Post.Comment]()
+    var comments = [Post.Comment]()
+    var commentsListener:NSObjectProtocol?
+    var postId:String?
+    
+    @IBOutlet weak var dockViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var commentText: UITextField!
+    @IBOutlet weak var commentsTableView: UITableView!
+    @IBOutlet weak var sendButton: UIButton!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //let singleTap = UITapGestureRecognizer(target: self, action: #selector(CommentsController.tableTapDetected))
-        //self.commentsTableView!.addGestureRecognizer(singleTap)
+        
+        //disable send button as a default value
+        sendButton.isEnabled = false
+        //add tap gesture to the tableView
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(CommentsController.tableTapDetected))
+        commentsTableView.addGestureRecognizer(singleTap)
+        //add a listner to comments list of a specific post
+        commentsListener = NotificationModel.postsCommentstNotification.observe(){
+            (data:Any) in
+            let newComments = data as! [Post.Comment]
+            self.comments = newComments.sorted { $0.creationDate > $1.creationDate }
+            self.commentsTableView.reloadData()
+        }
+        Model.instance.getPostComments(postId!)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+       NotificationModel.postsCommentstNotification.remove(observer: commentsListener!)
     }
     
     @objc func tableTapDetected() {
@@ -30,7 +53,10 @@ class CommentsController: UIViewController, UITableViewDelegate, UITableViewData
         UIView.animate(withDuration: 0.2, animations: {
             self.dockViewHeightConstraint.constant = 370
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }, completion: { (ok) in
+            if ok {
+                self.sendButton.isEnabled = true
+            }})
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -38,7 +64,10 @@ class CommentsController: UIViewController, UITableViewDelegate, UITableViewData
         UIView.animate(withDuration: 0.2, animations: {
             self.dockViewHeightConstraint.constant = 50
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }, completion: { (ok) in
+            if ok {
+                self.sendButton.isEnabled = false
+            }})
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,22 +80,18 @@ class CommentsController: UIViewController, UITableViewDelegate, UITableViewData
         cell.setCommentData(comments[indexPath.row])
         
         return cell
-        
-    }
-    
-    @IBOutlet weak var dockViewHeightConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var commentText: UITextField!
-    
-    @IBOutlet weak var commentsTableView: UITableView!
-    
-    @IBAction func OnSendCommentSubmit(_ sender: Any) {
-        self.commentText.endEditing(true)
     }
    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-       NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    @IBAction func OnSendCommentSubmit(_ sender: Any) {
+        if !(self.commentText!.text?.isEmpty)! {
+        Model.instance.addComment(self.postId!, Post.Comment("User Id", self.commentText!.text!, Consts.General.getNowDateTime()))
+        
+        commentText!.text = ""
+        self.sendButton.isEnabled = false
+        self.commentText.endEditing(true)
+        }
+        else {
+            self.present(Consts.General.getCancelAlertController(title: "Invalid Comment", messgae: "Please type a comment in the text field below"), animated: true, completion: nil)
+        }
     }
 }

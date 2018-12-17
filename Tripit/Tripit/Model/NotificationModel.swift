@@ -10,7 +10,8 @@ import Foundation
 
 class NotificationModel{
     static let postsListNotification = Notification<[Post]>("notification.postsdata")
-    
+    static let postsCommentstNotification = Notification<[Post.Comment]>("notification.postcommentsdata")
+
     class Notification<T>{
         let name:String
         var count = 0;

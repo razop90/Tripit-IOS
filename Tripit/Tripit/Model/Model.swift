@@ -23,18 +23,18 @@ class Model {
         })
     }
     
-    func getAllPosts(callback:@escaping ([Post])->Void){
-        firebaseModel.getAllPosts(callback: callback);
-        //return Student.getAll(database: modelSql!.database);
+    func getPostComments(_ postId:String) {
+        firebaseModel.getPostComments(postId, callback: {(data:[Post.Comment]) in
+            NotificationModel.postsCommentstNotification.notify(data: data)
+        })
     }
     
     func addNewPost(_ post:Post, _ image:UIImage, progressBlock: @escaping (_ presentage: Double) -> Void = {_ in}, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void = {_,_  in}){
         firebaseModel.addNewPost(post, image, progressBlock: progressBlock, completionBlock);
-        //Student.addNew(database: mo delSql!.database, student: student)
     }
     
-    func addComment(_ postId:String, _ comment:Post.Comment) {
-        firebaseModel.addComment(postId, comment)
+    func addComment(_ postId:String, _ comment:Post.Comment, _ completionBlock:@escaping (_ errorMessage:String?) -> Void = {_  in}) {
+        firebaseModel.addComment(postId, comment, completionBlock)
     }
     
     func addLike(_ postId:String, _ userId:String) {
@@ -43,7 +43,6 @@ class Model {
     
     func getPost(_ byId:String)->Post?{
         return firebaseModel.getPost(byId:byId)
-        //return Student.get(database: modelSql!.database, byId: byId);
     }
     
     func getImage(url:String, callback:@escaping (UIImage?)->Void){
