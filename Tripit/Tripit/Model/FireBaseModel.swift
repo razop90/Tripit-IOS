@@ -16,8 +16,7 @@ class FirebaseModel {
     
     init() {
         FirebaseApp.configure()
-        ref = Database.database().reference()
-        
+        ref = Database.database().reference()        
     }
     
     func getAllPosts(callback:@escaping ([Post])->Void){
@@ -34,6 +33,24 @@ class FirebaseModel {
                 data.append(Post(json: json as! [String : Any]))
             }
             callback(data)
+            }
+        })
+    }
+    
+    func getPostComments(_ postId:String, callback:@escaping ([Post.Comment])->Void){
+        //Listening to table changes. same as while(true)
+        ref.child(Consts.Posts.PostsTableName).child(postId).child(Consts.Posts.CommentsTableName).observe(.value, with: {
+            (snapshot) in
+            
+            if snapshot.exists() {
+                // Get user value
+                var data = [Post.Comment]()
+                
+                let value = snapshot.value as! [String:Any]
+                for (key, json) in value{
+                    data.append(Post.Comment(key, json as! [String:Any]))
+                }
+                callback(data)
             }
         })
     }
@@ -62,8 +79,12 @@ class FirebaseModel {
         return nil
     }
     
-    func addComment(_ postId:String, _ comment:Post.Comment) {
+    func addComment(_ postId:String, _ comment:Post.Comment, _ completionBlock:@escaping (_ errorMessage:String?) -> Void = {_  in}) {
+        let newCommentRef = self.ref!.child(Consts.Posts.PostsTableName).child(postId).child(Consts.Posts.CommentsTableName).childByAutoId()
+        comment.id = newCommentRef.key!
         
+        newCommentRef.setValue(comment.toJson())
+        //completionBlock(errorMessage)
     }
     
     func addLike(_ postId:String, _ userId:String) {

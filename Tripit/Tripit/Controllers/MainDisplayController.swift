@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 class  MainDisplayController : UIViewController, UITableViewDelegate, UITableViewDataSource {
-   
+    var lastCommentsVC:CommentsController?
+    var lastPostId:String?
     
     @IBOutlet var postsTableView: UITableView!
     var posts = [Post]()
@@ -26,7 +27,6 @@ class  MainDisplayController : UIViewController, UITableViewDelegate, UITableVie
             self.postsTableView.reloadData()
         }
         Model.instance.getAllPosts()
-
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,13 +34,37 @@ class  MainDisplayController : UIViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell    {
-        //let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-        //cell.textLabel?.text = list[indexPath.row]
         let cell:PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
         
-        cell.setPostData(posts[indexPath.row])
+        let post = posts[indexPath.row]
+        cell.setPostData(post)
+        
+        if self.lastCommentsVC != nil && self.lastPostId == post.id {
+                self.lastCommentsVC?.comments = post.comments
+                self.lastCommentsVC?.commentsTableView.reloadData()
+        }
         
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.destination is CommentsController {
+            
+            let commentsController = segue.destination as! CommentsController
+
+            let buttonPosition = (sender as AnyObject).convert(CGPoint(), to:postsTableView)
+            let indexPath = postsTableView.indexPathForRow(at:buttonPosition)
+            let post =  posts[(indexPath?.row)!]
+       
+            lastPostId = post.id
+            lastCommentsVC = commentsController
+        
+            commentsController.postId = post.id
+        }
+    }
+    
+    @IBAction func onLikeSubmit(_ sender: Any) {
+        
+    }
 }

@@ -28,7 +28,7 @@ class Post {
         likes = [String]()
         comments = [Comment]()
         creationDate = ""
-        creationDate = getNowDate()
+        creationDate = Consts.General.getNowDateTime()
     }
     
     init(_userID:String, _id:String, _location:String, _description:String){
@@ -40,7 +40,7 @@ class Post {
         likes = [String]()
         comments = [Comment]()
         creationDate = ""
-        creationDate = getNowDate()
+        creationDate = Consts.General.getNowDateTime()
     }
     
     init(json:[String:Any]) {
@@ -102,34 +102,23 @@ class Post {
     
     private func commentsToJson() -> [String:Any] {
         var array:[String:Any] = [String:Any]()
-        for comment in comments{
-            var usercomment:[String:Any] = [String:Any]()
-            
-            usercomment["comment"] = comment.comment
-            usercomment["creationDate"] = comment.creationDate
-            
-            array[comment.userId] = usercomment
+        for comment in comments {
+            if comment.id != nil {
+                array[comment.id!] = comment.toJson()
+            }
         }
         
         return array
     }
     
     private func jsonToComments(_ jsonComments:[String:Any]) {
-        for users in jsonComments {
-            comments.append(Comment(users.key, users.value as! [String:Any]))
+        for comment in jsonComments {
+            comments.append(Comment(comment.key, comment.value as! [String:Any]))
         }
     }
     
-     private func getNowDate() -> String {
-        let df = DateFormatter()
-        df.dateFormat = "yyy/MM/dd HH:mm:ss"
-        let now = df.string(from: Date())
-        
-        return now
-    }
-    
-    
     class Comment {
+        var id:String? = nil
         var userId:String = ""
         var comment:String = ""
         var creationDate:String = ""
@@ -140,10 +129,21 @@ class Post {
             self.creationDate = creationDate
         }
         
-        init(_ userId:String, _ commentDetails:[String:Any]) {
-            self.userId = userId
+        init(_ id:String, _ commentDetails:[String:Any]) {
+            self.id = id
+            self.userId = commentDetails["userID"] as! String
             self.comment = commentDetails["comment"] as! String
             self.creationDate = commentDetails["creationDate"] as! String
+        }
+        
+        func toJson() -> [String:Any] {
+            var comment:[String:Any] = [String:Any]()
+            
+            comment["userID"] = self.userId
+            comment["comment"] = self.comment
+            comment["creationDate"] = self.creationDate
+            
+            return comment
         }
     }
 }

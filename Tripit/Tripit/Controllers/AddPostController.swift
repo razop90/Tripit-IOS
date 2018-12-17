@@ -43,7 +43,7 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
 
     func UploadPost() {
         if LocationText.text?.isEmpty ?? true || DescriptionText.text?.isEmpty ?? true {
-            relayAlert(title: "New Post", messgae: "Please write something")
+            self.present(Consts.General.getCancelAlertController(title: "New Post", messgae: "Please write something"), animated: true, completion: nil)
             return
         }
         
@@ -67,16 +67,8 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                 self.dismiss(animated: true, completion: nil)
             })
         } else {
-            relayAlert(title: "New Post", messgae: "Please select an image")
-        }
-    }
-    
-    private func relayAlert(title:String, messgae:String, buttonText:String = "Dismiss")
-    {
-        let alertController = UIAlertController(title: title, message: messgae, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: buttonText, style: UIAlertAction.Style.cancel, handler: nil))
-        
-        self.present(alertController, animated: true, completion: nil)
+             self.present(Consts.General.getCancelAlertController(title: "New Post", messgae: "Please select an image"), animated: true, completion: nil)
+               }
     }
     
     @objc private func showImagePicker(){
