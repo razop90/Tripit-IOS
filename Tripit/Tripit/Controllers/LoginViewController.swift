@@ -17,21 +17,42 @@ class LoginViewController : UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //FirebaseApp.configure()
-        
-        //Test:
-        //let ref = Database.database().reference()
-        //ref.child("test33").setValue("te55544555")
     }
        
-    @IBAction func OnLoginSubmit(_ sender: Any) {
-        //Add login validation before the navigation function below
-          navigateToMainInterface()
+    @IBAction func onLoginTapped(_ sender: Any) {
+        let email = UsernameText.text
+        let password = PasswordText.text
+        
+        if(email == "" || password == "" ){
+            present(Consts.General.getCancelAlertController(title: "Login", messgae: "Please enter Email or Password"), animated: true)
+        }
+        else{
+            
+            Model.instance.signIn(email!, password!, { (res) in
+                
+                if(res) {
+                    self.loginSuccessfull();
+                } else {
+                    self.present(Consts.General.getCancelAlertController(title: "Login", messgae: "Failed while trying to Login. Please try again"), animated: true)
+                }
+            })
+            
+        }
     }
+  
+    func loginSuccessfull(){
+        //bundle is the place where all of the app's assets and source codes lived in before they compiled
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        //Getting the navigation controller
+        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "MainNavigationController") as? MainNavigationController else {
+            return
+        }
+        //Navigate to the main view
+        present(mainNavigationVC, animated: true, completion: nil)    }
     
     
-    private func navigateToMainInterface(){
+  /*  private func navigateToMainInterface(){
         //bundle is the place where all of the app's assets and source codes lived in before they compiled
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
@@ -42,4 +63,5 @@ class LoginViewController : UIViewController {
         //Navigate to the main view
         present(mainNavigationVC, animated: true, completion: nil)
     }
+       */
 }
