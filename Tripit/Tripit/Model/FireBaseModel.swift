@@ -125,7 +125,6 @@ class FirebaseModel {
     func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if authResult?.user != nil {
-                let use = authResult?.user.uid
                 print("1")
                 callback(true)
             }
@@ -134,12 +133,10 @@ class FirebaseModel {
                 callback(false)
             }
         }
-    }
-    
+    }    
     
     func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            
             if (user != nil  ) {
                 callback(true)
             }
@@ -149,10 +146,7 @@ class FirebaseModel {
         }
     }
     
-    func CurrentUser() -> User? {
+    func currentUser() -> User? {
         return Auth.auth().currentUser
     }
 }
-
-
-

@@ -102,7 +102,7 @@ class Model {
     }
     
     func currentUser() -> User? {
-        return firebaseModel.CurrentUser()
+        return firebaseModel.currentUser()
     }
 }
 
