@@ -48,5 +48,14 @@ class Model {
     func getImage(url:String, callback:@escaping (UIImage?)->Void){
         firebaseModel.getImage(url: url, callback: callback)
     }
+    func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
+    {
+        firebaseModel.signIn(email, password, callback)
+    }
+    
+    func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
+    {
+        firebaseModel.signUp(email, password,callback)
+    }
 }
 

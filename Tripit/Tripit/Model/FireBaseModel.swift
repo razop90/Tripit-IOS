@@ -145,7 +145,40 @@ class FirebaseModel {
             }
         }
     }
-
+    func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
+    {
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            if authResult?.user != nil {
+                let use = authResult?.user.uid
+                print("1")
+                callback(true)
+            }
+            else {
+                print("0")
+                callback(false)
+            }
+            //guard let user = authResult?.user else { return }
+            
+        }
+    }
+    
+    
+    func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
+    {
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if user != nil {
+                //let us =  user?.user.uid
+                callback(true)
+            }
+            else {
+                callback(false)
+            }
+            //guard let user = authResult?.user else { return }
+            
+        }
+    }
+    
+    
 }
 
 

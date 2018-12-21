@@ -11,11 +11,17 @@ import UIKit
 class RegisterViewController: UIViewController {
 
    
-
-
-
+    @IBOutlet weak var emailField: UITextField!
     
-
+    @IBOutlet weak var passwordFiled: UITextField!
+    
+    @IBOutlet weak var repasswordFiled: UITextField!
+    
+    
+    @IBAction func onRegisterTapped(_ sender: Any) {
+        
+    }
+    
     /*
     // MARK: - Navigation
 
