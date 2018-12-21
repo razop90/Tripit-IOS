@@ -19,7 +19,27 @@ class RegisterViewController: UIViewController {
     
     
     @IBAction func onRegisterTapped(_ sender: Any) {
+        guard
+            let email = emailField.text,
+            email != "",
+            
+            let password = passwordFiled.text,
+            password != ""
+            
+            else{
+                present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter Email or Password"), animated: true)
+                return
+        }
         
+        Model.instance.signUp(email, password, { (res) in
+            
+            if(res) {
+                self.performSegue(withIdentifier: "registerSugue", sender: nil)
+            } else {
+                self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
+            }
+        })
+
     }
     
     /*
