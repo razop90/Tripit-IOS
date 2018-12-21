@@ -13,7 +13,6 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var BuisyIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var Progress: UIProgressView!
     @IBOutlet weak var LocationText: UITextField!
     @IBOutlet weak var DescriptionText: UITextField!
     @IBOutlet weak var ImageTapIndicationLabel: UILabel!
@@ -26,7 +25,6 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         imageView.addGestureRecognizer(singleTap)
         
         BuisyIndicator.isHidden = true
-        //Progress.isHidden = true
     }
     
     @objc func tapDetected(){
@@ -50,19 +48,23 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         if let image = imageView.image {
             self.BuisyIndicator.isHidden = false
             self.BuisyIndicator.startAnimating()
-            //self.Progress.isHidden = false
             self.view.isUserInteractionEnabled = false
+            let userId = Model.instance.currentUser()?.uid
             
-            let postId:String = "\(Date().timeIntervalSince1970)" //Temp id for the post
-            let post = Post(_userID: "1234", _id: postId, _location: LocationText.text!, _description: DescriptionText.text!)
-            Model.instance.addNewPost(post, image, { (url) in
-                self.BuisyIndicator.isHidden = true
-                self.BuisyIndicator.stopAnimating()
-                //self.Progress.isHidden = true
-                self.view.isUserInteractionEnabled = true
+            if userId != nil {
+                let postId:String = "\(Date().timeIntervalSince1970)" //Temp id for the post
+                let post = Post(_userID: userId!, _id: postId, _location: LocationText.text!, _description: DescriptionText.text!)
+                Model.instance.addNewPost(post, image, { (url) in
+                    self.BuisyIndicator.isHidden = true
+                    self.BuisyIndicator.stopAnimating()
+                    self.view.isUserInteractionEnabled = true
                 
-                self.dismiss(animated: true, completion: nil)
-            })
+                    self.dismiss(animated: true, completion: nil)
+                })
+            }
+            else {
+                self.present(Consts.General.getCancelAlertController(title: "New Post - ERROR", messgae: "Current user wasn't found"), animated: true, completion: nil)
+            }
         } else {
             self.present(Consts.General.getCancelAlertController(title: "New Post", messgae: "Please select an image"), animated: true, completion: nil)
         }
@@ -79,7 +81,6 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     //Cloasing the picker in case of a cancelation request from the user
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        //picker.dismiss(animated: false, completion: nil)
         self.dismiss(animated: true, completion: nil)
     }
     

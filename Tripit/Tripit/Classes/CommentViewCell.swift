@@ -21,16 +21,31 @@ class CommentViewCell : UITableViewCell {
         super.awakeFromNib()
         
         // Initialization code
-        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2
+        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
         self.profileImageView.clipsToBounds = true
-        //self.profileImageView.layer.borderWidth = 3.0
-        
-        //self.profileImage.layer.borderColor = bordercolo
     }
     
-    public func setCommentData(_ comment:Post.Comment) {
+    public func setCommentData(_ comment:Post.Comment, _ row:Int) {
+        userNameText.text = ""
         commentText.text = comment.comment
-        userNameText.text = comment.userId
         timeText.text = comment.lastUpdate
+        profileImageView?.image = UIImage(named: "default_profile2")
+        profileImageView!.tag = row
+        
+        Model.instance.getUserInfo(comment.userId, callback: { (info) in
+              if info != nil {
+                self.userNameText.text = info?.displayName
+            
+                if info?.profileImageUrl != "" {
+                    Model.instance.getImage(url: info!.profileImageUrl!) { (image:UIImage?) in
+                        if (self.profileImageView!.tag == row){
+                            if image != nil {
+                                self.profileImageView?.image = image!
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 }
