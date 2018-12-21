@@ -149,4 +149,7 @@ class FirebaseModel {
     func currentUser() -> User? {
         return Auth.auth().currentUser
     }
+    
+    
+   
 }

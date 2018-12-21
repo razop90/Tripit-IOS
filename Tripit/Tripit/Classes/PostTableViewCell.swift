@@ -50,13 +50,4 @@ class PostTableViewCell : UITableViewCell {
     @IBAction func OnLikeSubmit(_ sender: Any) {
         
     }
-    @IBAction func OnCommentSubmit(_ sender: Any) {
-        
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
 }
