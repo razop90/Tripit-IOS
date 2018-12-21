@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class Post {
     var id:String
     let userID:String
     let location:String
     let description:String
-    var creationDate:String
+    var lastUpdate:String
+    var timestamp:Double
     var imageUrl:String?
     var likes:[String] //contains user id's
     var comments:[Comment]
@@ -27,8 +29,8 @@ class Post {
         imageUrl = _imageUrl
         likes = [String]()
         comments = [Comment]()
-        creationDate = ""
-        creationDate = Consts.General.getNowDateTime()
+        lastUpdate = ""
+        timestamp = 0
     }
     
     init(_userID:String, _id:String, _location:String, _description:String){
@@ -39,8 +41,8 @@ class Post {
         imageUrl = nil
         likes = [String]()
         comments = [Comment]()
-        creationDate = ""
-        creationDate = Consts.General.getNowDateTime()
+        lastUpdate = ""
+        timestamp = 0
     }
     
     init(json:[String:Any]) {
@@ -49,9 +51,18 @@ class Post {
         location = json["location"] as! String
         description = json["description"] as! String
         imageUrl = json["imageUrl"] as? String
-        creationDate = json["creationData"] as! String
         likes = [String]()
         comments = [Comment]()
+        
+        let date = json["lastUpdate"] as! Double?
+        if(date != nil) {
+            timestamp = date!
+            lastUpdate = Consts.General.convertTimestampToStringDate(self.timestamp)
+        }
+        else {
+            timestamp = 0
+            lastUpdate = ""
+        }
         
         //setting likes
         if json.keys.contains("likes") {
@@ -62,7 +73,7 @@ class Post {
         }
         
         //setting comments
-         if json.keys.contains("comments") {
+        if json.keys.contains("comments") {
             let jsonComments = json["comments"] as? [String:Any]
             if jsonComments != nil {
                 jsonToComments(jsonComments!)
@@ -77,16 +88,16 @@ class Post {
         json["location"] = location
         json["description"] = description
         json["imageUrl"] = imageUrl ?? ""
-        json["creationData"] = creationDate
+        json["lastUpdate"] = ServerValue.timestamp()
         json["likes"] = likesToJson()
         json["comments"] = commentsToJson()
-
+        
         return json
     }
     
     private func likesToJson() -> [String:Any] {
         var array:[String:Any] = [String:Any]()
-
+        
         for userId in likes {
             array[userId] = ""
         }
@@ -121,19 +132,28 @@ class Post {
         var id:String? = nil
         var userId:String = ""
         var comment:String = ""
-        var creationDate:String = ""
+        var lastUpdate:String = ""
+        var timestamp:Double = 0
         
-        init(_ userId:String, _ comment:String, _ creationDate:String) {
+        init(_ userId:String, _ comment:String) {
             self.userId = userId
             self.comment = comment
-            self.creationDate = creationDate
         }
         
         init(_ id:String, _ commentDetails:[String:Any]) {
             self.id = id
             self.userId = commentDetails["userID"] as! String
             self.comment = commentDetails["comment"] as! String
-            self.creationDate = commentDetails["creationDate"] as! String
+            
+            let date = commentDetails["lastUpdate"] as! Double?
+            if(date != nil) {
+                timestamp = date!
+                lastUpdate = Consts.General.convertTimestampToStringDate(self.timestamp)
+            }
+            else {
+                timestamp = 0
+                lastUpdate = ""
+            }
         }
         
         func toJson() -> [String:Any] {
@@ -141,7 +161,7 @@ class Post {
             
             comment["userID"] = self.userId
             comment["comment"] = self.comment
-            comment["creationDate"] = self.creationDate
+            comment["lastUpdate"] = ServerValue.timestamp()
             
             return comment
         }

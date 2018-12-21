@@ -10,36 +10,38 @@ import Foundation
 import UIKit
 
 class PostTableViewCell : UITableViewCell {
-   
+    
     @IBOutlet var userNameText: UILabel!
-    @IBOutlet var locationText: UILabel!    
+    @IBOutlet var locationText: UILabel!
     @IBOutlet var mainImage: UIImageView!
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var likesCounter: UILabel!
     @IBOutlet var commentsCounter: UILabel!
     @IBOutlet var descriptionText: UILabel!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
         self.profileImage.layer.borderWidth = 3.0
-       
+        
         //self.profileImage.layer.borderColor = bordercolo
     }
     
-    public func setPostData(_ post:Post) {
+    public func setPostData(_ post:Post, _ row:Int) {
         locationText.text = post.location
         descriptionText.text = post.description
         likesCounter.text = String(post.likes.count)
         commentsCounter.text = String(post.comments.count)
+        mainImage!.tag = row
         
-        //cell.profileImage?.image = UIImage(named: "default_profile2.jpg")
         if post.imageUrl != "" {
             Model.instance.getImage(url: post.imageUrl!) { (image:UIImage?) in
-                if image != nil {
-                    self.mainImage?.image = image!
+                if (self.mainImage!.tag == row){
+                    if image != nil {
+                        self.mainImage?.image = image!
+                    }
                 }
             }
         }

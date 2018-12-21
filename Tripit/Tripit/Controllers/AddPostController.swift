@@ -20,7 +20,7 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(AddPostController.tapDetected))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(singleTap)
@@ -40,7 +40,7 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBAction func OnPostSubmit(_ sender: Any) {
         UploadPost()
     }
-
+    
     func UploadPost() {
         if LocationText.text?.isEmpty ?? true || DescriptionText.text?.isEmpty ?? true {
             self.present(Consts.General.getCancelAlertController(title: "New Post", messgae: "Please write something"), animated: true, completion: nil)
@@ -48,17 +48,14 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         }
         
         if let image = imageView.image {
-        self.BuisyIndicator.isHidden = false
-        self.BuisyIndicator.startAnimating()
-        //self.Progress.isHidden = false
-        self.view.isUserInteractionEnabled = false
-
-        let postId:String = "\(Date().timeIntervalSince1970)" //Temp id for the post
-        let post = Post(_userID: "1234", _id: postId, _location: LocationText.text!, _description: DescriptionText.text!)
-            Model.instance.addNewPost(post, image, progressBlock: { (precentage) in
-                //self.Progress.progress = Float(precentage) / 100
-                print(precentage) //Printing the upload precentage
-            }, { (fileURL, errorMessage) in
+            self.BuisyIndicator.isHidden = false
+            self.BuisyIndicator.startAnimating()
+            //self.Progress.isHidden = false
+            self.view.isUserInteractionEnabled = false
+            
+            let postId:String = "\(Date().timeIntervalSince1970)" //Temp id for the post
+            let post = Post(_userID: "1234", _id: postId, _location: LocationText.text!, _description: DescriptionText.text!)
+            Model.instance.addNewPost(post, image, { (url) in
                 self.BuisyIndicator.isHidden = true
                 self.BuisyIndicator.stopAnimating()
                 //self.Progress.isHidden = true
@@ -67,8 +64,8 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                 self.dismiss(animated: true, completion: nil)
             })
         } else {
-             self.present(Consts.General.getCancelAlertController(title: "New Post", messgae: "Please select an image"), animated: true, completion: nil)
-               }
+            self.present(Consts.General.getCancelAlertController(title: "New Post", messgae: "Please select an image"), animated: true, completion: nil)
+        }
     }
     
     @objc private func showImagePicker(){
@@ -95,6 +92,6 @@ class AddPostController: UIViewController, UIImagePickerControllerDelegate, UINa
             imageView.image = nil
             ImageTapIndicationLabel.isHidden = false
         }
-         self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }

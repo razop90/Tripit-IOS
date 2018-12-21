@@ -8,9 +8,10 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 struct Consts{
-    struct Posts {       
+    struct Posts {
         static let PostsTableName: String = "Posts"
         static let ImagesFolderName: String = "ImagesStorage"
         static let LikesTableName: String = "likes"
@@ -18,12 +19,13 @@ struct Consts{
     }
     
     struct General {
-        static func getNowDateTime(_ format:String = "dd/MM/yyyy HH:mm") -> String {
-            let df = DateFormatter()
-            df.dateFormat = format
-            let now = df.string(from: Date())
+        static func convertTimestampToStringDate(_ serverTimestamp: Double, _ format:String = "dd/MM/yyyy HH:mm") -> String {
+            let x = serverTimestamp / 1000
+            let date = NSDate(timeIntervalSince1970: x)
+            let formatter = DateFormatter()
+            formatter.dateFormat = format
             
-            return now
+            return formatter.string(from: date as Date)
         }
         
         static func getCancelAlertController(title:String, messgae:String, buttonText:String = "Dismiss") -> UIAlertController
