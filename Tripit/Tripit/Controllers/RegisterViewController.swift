@@ -19,37 +19,57 @@ class RegisterViewController: UIViewController {
     
     
     @IBAction func onRegisterTapped(_ sender: Any) {
-        guard
-            let email = emailField.text,
-            email != "",
-            
-            let password = passwordFiled.text,
-            password != ""
-            
+        let email = emailField.text
+        let password = passwordFiled.text
+        let repassword = repasswordFiled.text
+        
+        if(email == "" || password == "" || password != repassword){
+            if(password != repassword){
+                present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter same passwords"), animated: true)
+            }
             else{
                 present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter Email or Password"), animated: true)
-                return
-        }
-        
-        Model.instance.signUp(email, password, { (res) in
-            
-            if(res) {
-                self.performSegue(withIdentifier: "registerSugue", sender: nil)
-            } else {
-                self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
             }
-        })
-
+        }
+        else{
+            
+            Model.instance.signUp(email!, password!, { (res) in
+                
+                if(res) {
+                    self.performSegue(withIdentifier: "registerSugue", sender: nil)
+                } else {
+                    self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
+                }
+            })
+        }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+
+
+/*  guard
+ let email = emailField.text,
+ email != "",
+ 
+ let password = passwordFiled.text,
+ password != "",
+ 
+ let repassword = repasswordFiled.text,
+ repassword != "",
+ 
+ password == repassword
+ 
+ else {
+ present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter Email or Password"), animated: true)
+ return
+ }
+ 
+ Model.instance.signUp(email, password, { (res) in
+ 
+ if(res) {
+ self.performSegue(withIdentifier: "registerSugue", sender: nil)
+ } else {
+ self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
+ }
+ })
+ */
