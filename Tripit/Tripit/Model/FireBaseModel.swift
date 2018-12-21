@@ -13,31 +13,33 @@ import UIKit
 
 class FirebaseModel {
     var ref: DatabaseReference!
+    lazy var storageRef = Storage.storage().reference(forURL:
+        "gs://tripit-65d75.appspot.com")
     
     init() {
         FirebaseApp.configure()
-        ref = Database.database().reference()        
+        ref = Database.database().reference()
     }
     
-    func getAllPosts(callback:@escaping ([Post])->Void){
+    func getAllPosts(callback:@escaping ([Post]) -> Void) {
         //Listening to table changes. same as while(true)
         ref.child(Consts.Posts.PostsTableName).observe(.value, with: {
             (snapshot) in
             
             if snapshot.exists() {
-            // Get user value
-            var data = [Post]()
-            
-            let value = snapshot.value as! [String:Any]
-            for (_, json) in value{
-                data.append(Post(json: json as! [String : Any]))
-            }
-            callback(data)
+                // Get user value
+                var data = [Post]()
+                
+                let value = snapshot.value as! [String:Any]
+                for (_, json) in value{
+                    data.append(Post(json: json as! [String : Any]))
+                }
+                callback(data)
             }
         })
     }
     
-    func getPostComments(_ postId:String, callback:@escaping ([Post.Comment])->Void){
+    func getPostComments(_ postId:String, callback:@escaping ([Post.Comment]) -> Void) {
         //Listening to table changes. same as while(true)
         ref.child(Consts.Posts.PostsTableName).child(postId).child(Consts.Posts.CommentsTableName).observe(.value, with: {
             (snapshot) in
@@ -55,27 +57,25 @@ class FirebaseModel {
         })
     }
     
-    func addNewPost(_ post:Post, _ image:UIImage?, progressBlock: @escaping (_ presentage: Double) -> Void = {_ in}, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void = {_,_  in}){
+    func addNewPost(_ post:Post, _ image:UIImage?, _ completionBlock:@escaping (_ url:String?) -> Void = {_  in}) {
+        
         if image != nil {
-            uploadImage(image!, progressBlock:progressBlock, { (fileURL, errorMessage) in
-                
-                print(fileURL ?? "no URL was found")
-                print(errorMessage ?? "no error exist")
-                post.imageUrl = fileURL?.absoluteString
+            Model.instance.saveImage(image: image!){ (url:String?) in
+                if url != nil {
+                    post.imageUrl = url!
+                }
                 
                 let newPostRef = self.ref!.child(Consts.Posts.PostsTableName).childByAutoId()
                 post.id = newPostRef.key!
                 
                 newPostRef.setValue(post.toJson())
                 
-                completionBlock(fileURL, errorMessage)
-            })
+                completionBlock(url)
+            }
         }
-        
-      
     }
     
-    func getPost(byId:String)->Post?{
+    func getPost(byId:String) -> Post? {
         return nil
     }
     
@@ -84,58 +84,34 @@ class FirebaseModel {
         comment.id = newCommentRef.key!
         
         newCommentRef.setValue(comment.toJson())
-        //completionBlock(errorMessage)
     }
     
     func addLike(_ postId:String, _ userId:String) {
         
     }
     
-    func uploadImage(_ image:UIImage, progressBlock: @escaping (_ presentage: Double) -> Void, _ completionBlock:@escaping (_ url:URL?, _ errorMessage:String?) -> Void) -> Void {
-        //var returnedURL: URL? = nil
-        let storage = Storage.storage() //The birebase storage object
-        let storageReference = storage.reference() //The firebase storage reference
-        
-        //Storage/postsImages/{customID}/image.jpg
+    func saveImage(image:UIImage, callback:@escaping (String?) -> Void) {
+        let data = image.jpegData(compressionQuality: 0.8)
         let imageName = "\(Date().timeIntervalSince1970).jpg"
-        let imageReference = storageReference.child(Consts.Posts.ImagesFolderName).child(imageName)
+        let imageRef = storageRef.child(Consts.Posts.ImagesFolderName).child(imageName)
         
-        //Starting the upload - trying to convert the image into Data by 0.8% quality
-        if let imageData = image.jpegData(compressionQuality: 0.8) {
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/jpeg" //Letting firebase to know the we want to uplad an image
-            //Uploading the image Data
-            let uploadTask = imageReference.putData(imageData, metadata: metadata, completion: { (metadata, error) in
-                if metadata != nil {
-                    imageReference.downloadURL{ url, error in
-                        //Returning the URL and return errors if exist
-                        completionBlock(url, error?.localizedDescription)
-                        //returnedURL = url
-                    }
-                } else {
-                    //No URL was found
-                    completionBlock(nil, error?.localizedDescription)
-                }
-            })
-            //Getting the upload progress Data of the image
-            uploadTask.observe(.progress, handler: { (snapshot) in
-                //Checking if there is a progress in order to update the progress
-                guard let progress = snapshot.progress else {
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        imageRef.putData(data!, metadata: metadata) { (metadata, error) in
+            imageRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    // Uh-oh, an error occurred!
                     return
                 }
-                
-                let precentage = (Double(progress.completedUnitCount) / Double(progress.totalUnitCount)) * 100
-                progressBlock(precentage)
-            })
-        } else {
-            completionBlock(nil, "Image couldn't be converted to Data.")
+                print("url: \(downloadURL)")
+                callback(downloadURL.absoluteString)
+            }
         }
-        
-        //return returnedURL
     }
     
-    func getImage(url:String, callback:@escaping (UIImage?)->Void){
-          let ref = Storage.storage().reference(forURL: url)
+    func getImage(url:String, callback:@escaping (UIImage?) -> Void) {
+        let ref = Storage.storage().reference(forURL: url)
         ref.getData(maxSize: 10 * 1024 * 1024) { data, error in
             if error != nil {
                 callback(nil)
@@ -145,8 +121,8 @@ class FirebaseModel {
             }
         }
     }
-    func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
-    {
+    
+    func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if authResult?.user != nil {
                 let use = authResult?.user.uid
@@ -157,29 +133,23 @@ class FirebaseModel {
                 print("0")
                 callback(false)
             }
-            //guard let user = authResult?.user else { return }
-            
         }
     }
     
     
-    func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
-    {
+    func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             
             if (user != nil  ) {
-                //let use =  user?.user.uid
                 callback(true)
             }
             else {
                 callback(false)
             }
-            //guard let user = authResult?.user else { return }
-            
         }
     }
     
-    func CurrentUser()-> User?{
+    func CurrentUser() -> User? {
         return Auth.auth().currentUser
     }
 }

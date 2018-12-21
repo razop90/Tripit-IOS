@@ -19,7 +19,7 @@ class CommentsController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var commentText: UITextField!
     @IBOutlet weak var commentsTableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,18 +33,18 @@ class CommentsController: UIViewController, UITableViewDelegate, UITableViewData
         commentsListener = NotificationModel.postsCommentstNotification.observe(){
             (data:Any) in
             let newComments = data as! [Post.Comment]
-            self.comments = newComments.sorted { $0.creationDate > $1.creationDate }
+            self.comments = newComments.sorted { $0.timestamp > $1.timestamp }
             self.commentsTableView.reloadData()
         }
         Model.instance.getPostComments(postId!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-       NotificationModel.postsCommentstNotification.remove(observer: commentsListener!)
+        NotificationModel.postsCommentstNotification.remove(observer: commentsListener!)
     }
     
     @objc func tableTapDetected() {
-         self.commentText.endEditing(true)
+        self.commentText.endEditing(true)
     }
     
     //MARK: text
@@ -75,20 +75,20 @@ class CommentsController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       let cell:CommentViewCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentViewCell
+        let cell:CommentViewCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentViewCell
         
         cell.setCommentData(comments[indexPath.row])
         
         return cell
     }
-   
+    
     @IBAction func OnSendCommentSubmit(_ sender: Any) {
         if !(self.commentText!.text?.isEmpty)! {
-        Model.instance.addComment(self.postId!, Post.Comment("User Id", self.commentText!.text!, Consts.General.getNowDateTime()))
-        
-        commentText!.text = ""
-        self.sendButton.isEnabled = false
-        self.commentText.endEditing(true)
+            Model.instance.addComment(self.postId!, Post.Comment("User Id", self.commentText!.text!))
+            
+            commentText!.text = ""
+            self.sendButton.isEnabled = false
+            self.commentText.endEditing(true)
         }
         else {
             self.present(Consts.General.getCancelAlertController(title: "Invalid Comment", messgae: "Please type a comment in the text field below"), animated: true, completion: nil)
