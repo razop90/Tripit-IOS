@@ -618,7 +618,6 @@
                                 </state>
                                 <connections>
                                     <action selector="onLoginTapped:" destination="Rxb-Sd-j8o" eventType="touchUpInside" id="r7F-bx-Ly0"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="5KD-yC-H3R"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yi-oB-xl0">
@@ -701,6 +700,6 @@
         <image name="no_pic.png" width="800" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5KD-yC-H3R"/>
+        <segue reference="gLr-dS-fwv"/>
     </inferredMetricsTieBreakers>
 </document>

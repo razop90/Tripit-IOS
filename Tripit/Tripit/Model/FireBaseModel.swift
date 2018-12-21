@@ -166,8 +166,9 @@ class FirebaseModel {
     func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
     {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            if user != nil {
-                //let us =  user?.user.uid
+            
+            if (user != nil  ) {
+                //let use =  user?.user.uid
                 callback(true)
             }
             else {

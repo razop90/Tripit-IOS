@@ -31,7 +31,6 @@ class LoginViewController : UIViewController {
             Model.instance.signIn(email!, password!, { (res) in
                 
                 if(res) {
-                    //self.performSegue(withIdentifier: "loginSegue", sender: nil)
                     self.loginSuccessfull();
                 } else {
                     self.present(Consts.General.getCancelAlertController(title: "Login", messgae: "Failed while trying to Login. Please try again"), animated: true)
