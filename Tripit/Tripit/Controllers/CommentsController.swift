@@ -77,14 +77,20 @@ class CommentsController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:CommentViewCell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentViewCell
         
-        cell.setCommentData(comments[indexPath.row])
+        cell.setCommentData(comments[indexPath.row], indexPath.row)
         
         return cell
     }
     
     @IBAction func OnSendCommentSubmit(_ sender: Any) {
-        if !(self.commentText!.text?.isEmpty)! {
-            Model.instance.addComment(self.postId!, Post.Comment("User Id", self.commentText!.text!))
+        let user = Model.instance.currentUser()
+        if user == nil {
+            self.present(Consts.General.getCancelAlertController(title: "Invalid User", messgae: "The logged user isn't recognized"), animated: true, completion: nil)
+            return
+        }
+        
+        if !(self.commentText!.text!.isEmpty) {
+            Model.instance.addComment(self.postId!, Post.Comment(user!.uid, self.commentText!.text!))
             
             commentText!.text = ""
             self.sendButton.isEnabled = false

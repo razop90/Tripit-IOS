@@ -13,7 +13,9 @@ import Firebase
 struct Consts{
     struct Posts {
         static let PostsTableName: String = "Posts"
+        static let UserInfoTableName: String = "Users"
         static let ImagesFolderName: String = "ImagesStorage"
+        static let ProfileImagesFolderName: String = "ProfileImagesStorage"
         static let LikesTableName: String = "likes"
         static let CommentsTableName: String = "comments"
     }

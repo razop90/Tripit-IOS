@@ -31,7 +31,15 @@ class Model {
     }
     
     func addNewPost(_ post:Post, _ image:UIImage, _ completionBlock:@escaping (_ url:String?) -> Void = {_  in}){
-        firebaseModel.addNewPost(post, image, completionBlock);
+        firebaseModel.addNewPost(post, image, completionBlock)
+    }
+    
+    func addUserInfo(_ userInfo:UserInfo, _ image:UIImage?, _ ccompletionBlock:@escaping (Bool) -> Void = {_  in}) {
+        firebaseModel.addUserInfo(userInfo, image, ccompletionBlock)
+    }
+    
+    func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
+         firebaseModel.getUserInfo(uid, callback: callback)
     }
     
     func addComment(_ postId:String, _ comment:Post.Comment, _ completionBlock:@escaping (_ errorMessage:String?) -> Void = {_  in}) {
@@ -46,13 +54,7 @@ class Model {
         return firebaseModel.getPost(byId:byId)
     }
     
-    func saveImage(image:UIImage, callback:@escaping (String?)->Void){
-        firebaseModel.saveImage(image: image, callback: callback)
-    }
-    
-    func getImage(url:String, callback:@escaping (UIImage?)->Void){
-        //modelFirebase.getImage(url: url, callback: callback)
-        
+    func getImage(url:String, callback:@escaping (UIImage?)->Void){        
         //1. try to get the image from local store
         let _url = URL(string: url)
         let localImageName = _url!.lastPathComponent

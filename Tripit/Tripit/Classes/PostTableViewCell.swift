@@ -25,16 +25,34 @@ class PostTableViewCell : UITableViewCell {
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
         self.profileImage.layer.borderWidth = 3.0
-        
-        //self.profileImage.layer.borderColor = bordercolo
     }
     
     public func setPostData(_ post:Post, _ row:Int) {
+        userNameText.text = ""
         locationText.text = post.location
         descriptionText.text = post.description
         likesCounter.text = String(post.likes.count)
         commentsCounter.text = String(post.comments.count)
+        mainImage?.image = UIImage(named: "no_pic")
+        profileImage?.image = UIImage(named: "default_profile2")
         mainImage!.tag = row
+        profileImage!.tag = row
+        
+        Model.instance.getUserInfo(post.userID, callback: { (info) in
+            if info != nil {
+                self.userNameText.text = info?.displayName
+            
+                if info?.profileImageUrl != "" {
+                    Model.instance.getImage(url: info!.profileImageUrl!) { (image:UIImage?) in
+                        if (self.profileImage!.tag == row){
+                            if image != nil {
+                                self.profileImage?.image = image!
+                            }
+                        }
+                    }
+                }
+            }
+        })
         
         if post.imageUrl != "" {
             Model.instance.getImage(url: post.imageUrl!) { (image:UIImage?) in
