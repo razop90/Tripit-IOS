@@ -57,8 +57,7 @@ class Post {
         let date = json["lastUpdate"] as! Double?
         if(date != nil) {
             timestamp = date!
-            lastUpdate = ""
-            //lastUpdate = Consts.General.convertTimestampToStringDate(self.timestamp)
+            lastUpdate = Consts.General.convertTimestampToStringDate(self.timestamp)
         }
         else {
             timestamp = 0
@@ -149,7 +148,7 @@ class Post {
             let date = commentDetails["lastUpdate"] as! Double?
             if(date != nil) {
                 timestamp = date!
-                //lastUpdate = Consts.General.convertTimestampToStringDate(self.timestamp)
+                lastUpdate = Consts.General.convertTimestampToStringDate(self.timestamp)
             }
             else {
                 timestamp = 0
