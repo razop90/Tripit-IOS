@@ -179,9 +179,7 @@ class FirebaseModel {
         }
     }
     
-    func CurrentUser()-> User?{
-        return Auth.auth().currentUser
-    }
+    
 }
 
 
