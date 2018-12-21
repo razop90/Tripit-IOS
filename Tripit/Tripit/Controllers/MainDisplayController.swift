@@ -12,6 +12,9 @@ import UIKit
 class  MainDisplayController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     var lastCommentsVC:CommentsController?
     var lastPostId:String?
+   // let currentusercheck = userCheck()
+    
+    
     
     @IBOutlet var postsTableView: UITableView!
     var posts = [Post]()
@@ -67,4 +70,16 @@ class  MainDisplayController : UIViewController, UITableViewDelegate, UITableVie
     @IBAction func onLikeSubmit(_ sender: Any) {
         
     }
+
 }
+/*func userCheck()->String?{
+    let user = Model.instance.currentUser()
+    if(user != nil){
+        let userEmail = user?.email
+        return userEmail
+    }
+    else{
+        return nil
+    }
+}
+*/

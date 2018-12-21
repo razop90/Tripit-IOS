@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class Model {
     static let instance:Model = Model()
@@ -56,6 +57,10 @@ class Model {
     func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
     {
         firebaseModel.signUp(email, password,callback)
+    }
+    
+    func currentUser()->User?{
+        return firebaseModel.CurrentUser()
     }
 }
 
