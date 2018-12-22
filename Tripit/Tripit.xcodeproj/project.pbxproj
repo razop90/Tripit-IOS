@@ -35,6 +35,7 @@
 		84B75F4021C4706F00F4D70E /* like_unpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B75F3D21C4706E00F4D70E /* like_unpressed.png */; };
 		84B75F4121C4706F00F4D70E /* like_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B75F3E21C4706F00F4D70E /* like_pressed.png */; };
 		84B75F4221C4706F00F4D70E /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B75F3F21C4706F00F4D70E /* comment.png */; };
+		84F4F97221CEBEE9003DDC26 /* earth-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F4F97121CEBEE8003DDC26 /* earth-icon.png */; };
 		8F0E6C355206F9995738A368 /* Pods_TripitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A07C4DA03A8F4A8B2F0BEC8 /* Pods_TripitTests.framework */; };
 		91BD72149699C207B18F8B5A /* Pods_Tripit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D374EF9D380A63858D0350C4 /* Pods_Tripit.framework */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,7 @@
 		84B75F3D21C4706E00F4D70E /* like_unpressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like_unpressed.png; sourceTree = "<group>"; };
 		84B75F3E21C4706F00F4D70E /* like_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like_pressed.png; sourceTree = "<group>"; };
 		84B75F3F21C4706F00F4D70E /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
+		84F4F97121CEBEE8003DDC26 /* earth-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "earth-icon.png"; sourceTree = "<group>"; };
 		B13A167F51A75F3ABD2CD690 /* Pods-TripitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripitUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TripitUITests/Pods-TripitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C5EBE020E594CC1D0FA7820C /* Pods-TripitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TripitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TripitTests/Pods-TripitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D374EF9D380A63858D0350C4 /* Pods_Tripit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tripit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				84B75F3921C46E9D00F4D70E /* marker.png */,
+				84F4F97121CEBEE8003DDC26 /* earth-icon.png */,
 				84B75F2D21C460C500F4D70E /* default_profile.jpg */,
 				84B75F3F21C4706F00F4D70E /* comment.png */,
 				84B75F3E21C4706F00F4D70E /* like_pressed.png */,
@@ -367,6 +370,7 @@
 			files = (
 				84B75F4121C4706F00F4D70E /* like_pressed.png in Resources */,
 				8207C23021B4781F000197D5 /* GoogleService-Info.plist in Resources */,
+				84F4F97221CEBEE9003DDC26 /* earth-icon.png in Resources */,
 				84B75F4021C4706F00F4D70E /* like_unpressed.png in Resources */,
 				820D19C121B2D96B0026655D /* Assets.xcassets in Resources */,
 				84B75F3C21C46F5C00F4D70E /* no_pic.png in Resources */,
