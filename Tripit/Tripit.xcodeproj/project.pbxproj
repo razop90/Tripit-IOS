@@ -26,6 +26,11 @@
 		8435D13321C6ED86001B1208 /* CommentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435D13221C6ED86001B1208 /* CommentViewCell.swift */; };
 		8449A53D21C56A15006A05AC /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449A53C21C56A15006A05AC /* RegisterViewController.swift */; };
 		8449F58121CD87740037FEC4 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449F58021CD87740037FEC4 /* UserInfo.swift */; };
+		844D86B521D641DB00FA8174 /* PostSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D86B421D641DB00FA8174 /* PostSqlExtension.swift */; };
+		844D86B721D650E100FA8174 /* LastUpdateDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D86B621D650E100FA8174 /* LastUpdateDates.swift */; };
+		844D86B921D651D000FA8174 /* SqlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D86B821D651D000FA8174 /* SqlModel.swift */; };
+		844D86BB21D6ACDD00FA8174 /* CommentSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D86BA21D6ACDD00FA8174 /* CommentSqlExtension.swift */; };
+		844D86BD21D6CE3A00FA8174 /* UserInfoSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D86BC21D6CE3A00FA8174 /* UserInfoSqlExtension.swift */; };
 		84B75F2421C42C1700F4D70E /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B75F2321C42C1700F4D70E /* PostTableViewCell.swift */; };
 		84B75F2621C43FD500F4D70E /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B75F2521C43FD500F4D70E /* NotificationModel.swift */; };
 		84B75F2F21C460C500F4D70E /* default_profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84B75F2D21C460C500F4D70E /* default_profile.jpg */; };
@@ -84,6 +89,11 @@
 		8435D13221C6ED86001B1208 /* CommentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewCell.swift; sourceTree = "<group>"; };
 		8449A53C21C56A15006A05AC /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8449F58021CD87740037FEC4 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		844D86B421D641DB00FA8174 /* PostSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSqlExtension.swift; sourceTree = "<group>"; };
+		844D86B621D650E100FA8174 /* LastUpdateDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastUpdateDates.swift; sourceTree = "<group>"; };
+		844D86B821D651D000FA8174 /* SqlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlModel.swift; sourceTree = "<group>"; };
+		844D86BA21D6ACDD00FA8174 /* CommentSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSqlExtension.swift; sourceTree = "<group>"; };
+		844D86BC21D6CE3A00FA8174 /* UserInfoSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSqlExtension.swift; sourceTree = "<group>"; };
 		84B75F2321C42C1700F4D70E /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		84B75F2521C43FD500F4D70E /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		84B75F2D21C460C500F4D70E /* default_profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default_profile.jpg; sourceTree = "<group>"; };
@@ -217,6 +227,7 @@
 				82093AC321BA81AE000B9DF3 /* Model.swift */,
 				82093AC721BA823D000B9DF3 /* FirebaseModel.swift */,
 				84B75F2521C43FD500F4D70E /* NotificationModel.swift */,
+				844D86B821D651D000FA8174 /* SqlModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,6 +243,16 @@
 				8435D12E21C6CFC6001B1208 /* CommentsController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		844D86B321D6419400FA8174 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				844D86B421D641DB00FA8174 /* PostSqlExtension.swift */,
+				844D86BA21D6ACDD00FA8174 /* CommentSqlExtension.swift */,
+				844D86BC21D6CE3A00FA8174 /* UserInfoSqlExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		84B75F1F21C42B2000F4D70E /* Imges */ = {
@@ -252,10 +273,12 @@
 		84B75F2221C42BFC00F4D70E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				844D86B321D6419400FA8174 /* Extensions */,
 				84B75F2321C42C1700F4D70E /* PostTableViewCell.swift */,
 				8435D13221C6ED86001B1208 /* CommentViewCell.swift */,
 				82093AC921BA8288000B9DF3 /* Post.swift */,
 				8449F58021CD87740037FEC4 /* UserInfo.swift */,
+				844D86B621D650E100FA8174 /* LastUpdateDates.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -504,15 +527,20 @@
 				82093AC821BA823D000B9DF3 /* FirebaseModel.swift in Sources */,
 				82093AC421BA81AE000B9DF3 /* Model.swift in Sources */,
 				8449A53D21C56A15006A05AC /* RegisterViewController.swift in Sources */,
+				844D86B521D641DB00FA8174 /* PostSqlExtension.swift in Sources */,
 				8435D13321C6ED86001B1208 /* CommentViewCell.swift in Sources */,
+				844D86B921D651D000FA8174 /* SqlModel.swift in Sources */,
 				82AEE2C321BAA5E1008A01B8 /* MainNavigationController.swift in Sources */,
 				8435D12F21C6CFC6001B1208 /* CommentsController.swift in Sources */,
 				8243A36621BAD6E4001C7108 /* MainDisplayController.swift in Sources */,
+				844D86BB21D6ACDD00FA8174 /* CommentSqlExtension.swift in Sources */,
 				820D19BA21B2D96A0026655D /* AppDelegate.swift in Sources */,
 				84B75F2621C43FD500F4D70E /* NotificationModel.swift in Sources */,
 				82AEE2C521BAA97B008A01B8 /* LoginViewController.swift in Sources */,
 				82093ACE21BA8744000B9DF3 /* Consts.swift in Sources */,
 				82AEE2C721BACB48008A01B8 /* AddPostController.swift in Sources */,
+				844D86B721D650E100FA8174 /* LastUpdateDates.swift in Sources */,
+				844D86BD21D6CE3A00FA8174 /* UserInfoSqlExtension.swift in Sources */,
 				8449F58121CD87740037FEC4 /* UserInfo.swift in Sources */,
 				82093ACA21BA8288000B9DF3 /* Post.swift in Sources */,
 			);

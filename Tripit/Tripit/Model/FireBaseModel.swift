@@ -39,6 +39,20 @@ class FirebaseModel {
         })
     }
     
+    func getAllPostsFromDate(from:Double, callback:@escaping ([Post])->Void) {
+        let stRef = ref.child("Posts")
+        let fbQuery = stRef.queryOrdered(byChild: "lastUpdate").queryStarting(atValue: from)
+        fbQuery.observe(.value) { (snapshot) in
+            var data = [Post]()
+            if let value = snapshot.value as? [String:Any] {
+                for (_, json) in value{
+                    data.append(Post(json: json as! [String : Any]))
+                }
+            }
+            callback(data)
+        }
+    }
+    
     func getPostComments(_ postId:String, callback:@escaping ([Post.Comment]) -> Void) {
         //Listening to table changes. same as while(true)
         ref.child(Consts.Posts.PostsTableName).child(postId).child(Consts.Posts.CommentsTableName).observe(.value, with: {
@@ -115,8 +129,10 @@ class FirebaseModel {
     func addComment(_ postId:String, _ comment:Post.Comment, _ completionBlock:@escaping (_ errorMessage:String?) -> Void = {_  in}) {
         let newCommentRef = self.ref!.child(Consts.Posts.PostsTableName).child(postId).child(Consts.Posts.CommentsTableName).childByAutoId()
         comment.id = newCommentRef.key!
-        
+
         newCommentRef.setValue(comment.toJson())
+        //updating the comment's post update time
+        self.ref!.child(Consts.Posts.PostsTableName).child(postId).child("lastUpdate").setValue(ServerValue.timestamp())
     }
     
     func addLike(_ postId:String, _ userId:String) {
