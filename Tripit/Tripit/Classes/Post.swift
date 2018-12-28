@@ -15,13 +15,14 @@ class Post {
     let userID:String
     let location:String
     let description:String
-    var lastUpdate:String
-    var timestamp:Double
+    var creationDateStringFormat:String
+    var creationDate:Double
+    var lastUpdate:Double
     var imageUrl:String?
     var likes:[String] //contains user id's
     var comments:[Comment]
     
-    init(_userID:String, _id:String, _location:String, _description:String, _imageUrl:String? = nil){
+    init(_userID:String, _id:String, _location:String, _description:String, _creationDate:Double = 0, _imageUrl:String? = nil, _lastUpdate:Double = 0){
         id = _id
         userID = _userID
         location = _location
@@ -29,20 +30,9 @@ class Post {
         imageUrl = _imageUrl
         likes = [String]()
         comments = [Comment]()
-        lastUpdate = ""
-        timestamp = 0
-    }
-    
-    init(_userID:String, _id:String, _location:String, _description:String){
-        id = _id
-        userID = _userID
-        location = _location
-        description = _description
-        imageUrl = nil
-        likes = [String]()
-        comments = [Comment]()
-        lastUpdate = ""
-        timestamp = 0
+        creationDate = _creationDate
+        creationDateStringFormat = Consts.General.convertTimestampToStringDate(self.creationDate)
+        lastUpdate = _lastUpdate
     }
     
     init(json:[String:Any]) {
@@ -54,14 +44,22 @@ class Post {
         likes = [String]()
         comments = [Comment]()
         
-        let date = json["lastUpdate"] as! Double?
-        if(date != nil) {
-            timestamp = date!
-            lastUpdate = Consts.General.convertTimestampToStringDate(self.timestamp)
+        let _creationDate = json["creationDate"] as! Double?
+        if(_creationDate != nil) {
+            creationDate = _creationDate!
+            creationDateStringFormat = Consts.General.convertTimestampToStringDate(self.creationDate)
         }
         else {
-            timestamp = 0
-            lastUpdate = ""
+            creationDate = 0
+            creationDateStringFormat = ""
+        }
+        
+        let _lastUpdate = json["lastUpdate"] as! Double?
+        if(_lastUpdate != nil) {
+            lastUpdate = _lastUpdate!
+        }
+        else {
+            lastUpdate = 0
         }
         
         //setting likes
@@ -88,6 +86,7 @@ class Post {
         json["location"] = location
         json["description"] = description
         json["imageUrl"] = imageUrl ?? ""
+        json["creationDate"] = ServerValue.timestamp()
         json["lastUpdate"] = ServerValue.timestamp()
         json["likes"] = likesToJson()
         json["comments"] = commentsToJson()
@@ -135,9 +134,12 @@ class Post {
         var lastUpdate:String = ""
         var timestamp:Double = 0
         
-        init(_ userId:String, _ comment:String) {
+        init(_ userId:String, _ comment:String, _ timestamp:Double = 0, _ id:String? = nil) {
+            self.id = id
             self.userId = userId
             self.comment = comment
+            self.timestamp = timestamp
+            self.lastUpdate = Consts.General.convertTimestampToStringDate(self.timestamp)
         }
         
         init(_ id:String, _ commentDetails:[String:Any]) {

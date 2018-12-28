@@ -14,14 +14,38 @@ class Model {
     static let instance:Model = Model()
     
     var firebaseModel = FirebaseModel();
+    var sqlModel = SqlModel();
     
     private init(){
     }
     
     func getAllPosts() {
-        firebaseModel.getAllPosts(callback: {(data:[Post]) in
-            NotificationModel.postsListNotification.notify(data: data)
-        })
+        var lastUpdated = Post.getLastUpdateDate(database: sqlModel.database)
+        lastUpdated += 1;
+        var isUpdated = false
+        
+        firebaseModel.getAllPostsFromDate(from:lastUpdated){ (data:[Post]) in
+            for post in data {
+                Post.addNew(database: self.sqlModel.database, post: post)
+               
+                if (post.lastUpdate > lastUpdated) {
+                    lastUpdated = post.lastUpdate
+                    isUpdated = true
+                }
+            }
+            
+            if(isUpdated) {
+                Post.setLastUpdateDate(database: self.sqlModel.database, date: lastUpdated)
+                self.getAllPostsFromLocalAndNotify()
+            }
+        }
+        
+        getAllPostsFromLocalAndNotify()
+    }
+    
+    private func getAllPostsFromLocalAndNotify(){
+        let postData = Post.getAll(database: self.sqlModel.database)
+        NotificationModel.postsListNotification.notify(data: postData)
     }
     
     func getPostComments(_ postId:String) {
@@ -34,12 +58,35 @@ class Model {
         firebaseModel.addNewPost(post, image, completionBlock)
     }
     
-    func addUserInfo(_ userInfo:UserInfo, _ image:UIImage?, _ ccompletionBlock:@escaping (Bool) -> Void = {_  in}) {
-        firebaseModel.addUserInfo(userInfo, image, ccompletionBlock)
+    func addUserInfo(_ userInfo:UserInfo, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
+        firebaseModel.addUserInfo(userInfo, image, completionBlock)
     }
     
     func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
-         firebaseModel.getUserInfo(uid, callback: callback)
+        firebaseModel.getUserInfo(uid) { (info:UserInfo?) in
+            if(info != nil) {
+                var lastUpdated = UserInfo.getLastUpdateDate(database: self.sqlModel.database)
+                lastUpdated += 1;
+            
+                UserInfo.addNew(database: self.sqlModel.database, info: info!)
+                    
+                if (info!.timestamp > lastUpdated) {
+                    lastUpdated = info!.timestamp
+                    UserInfo.setLastUpdateDate(database: self.sqlModel.database, date: lastUpdated)
+                    self.getUserInfoFromLocalAndNotify(uid, callback)
+                }
+            }
+        }
+        
+        getUserInfoFromLocalAndNotify(uid, callback)
+    }
+    
+    private func getUserInfoFromLocalAndNotify(_ uid:String, _ callback:@escaping (UserInfo?) -> Void) {
+        let info = UserInfo.get(database: self.sqlModel.database, userId: uid)
+        if(info != nil) {
+            callback(info)
+            NotificationModel.userInfoNotification.notify(data: info!)
+        }
     }
     
     func addComment(_ postId:String, _ comment:Post.Comment, _ completionBlock:@escaping (_ errorMessage:String?) -> Void = {_  in}) {

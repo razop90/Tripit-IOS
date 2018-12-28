@@ -11,7 +11,6 @@ import UIKit
 
 class  MainDisplayController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     var lastCommentsVC:CommentsController?
-    var lastPostId:String?
     
     @IBOutlet var postsTableView: UITableView!
     var posts = [Post]()
@@ -23,7 +22,7 @@ class  MainDisplayController : UIViewController, UITableViewDelegate, UITableVie
         postsListener = NotificationModel.postsListNotification.observe(){
             (data:Any) in
             let newPosts = data as! [Post]
-            self.posts = newPosts.sorted { $0.timestamp > $1.timestamp }
+            self.posts = newPosts.sorted { $0.creationDate > $1.creationDate }
             self.postsTableView.reloadData()
         }
         Model.instance.getAllPosts()
@@ -39,11 +38,6 @@ class  MainDisplayController : UIViewController, UITableViewDelegate, UITableVie
         let post = posts[indexPath.row]
         cell.setPostData(post, indexPath.row)
         
-        if self.lastCommentsVC != nil && self.lastPostId == post.id {
-            self.lastCommentsVC?.comments = post.comments
-            self.lastCommentsVC?.commentsTableView.reloadData()
-        }
-        
         return cell
     }
     
@@ -57,10 +51,9 @@ class  MainDisplayController : UIViewController, UITableViewDelegate, UITableVie
             let indexPath = postsTableView.indexPathForRow(at:buttonPosition)
             let post =  posts[(indexPath?.row)!]
             
-            lastPostId = post.id
             lastCommentsVC = commentsController
-            
             commentsController.postId = post.id
+            commentsController.comments = post.comments
         }
     }
     

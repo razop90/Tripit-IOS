@@ -18,9 +18,18 @@ class LoginViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let user = Model.instance.currentUser()
         
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.tapDetected))
-        viewcontainer.addGestureRecognizer(singleTap)
+        if(user != nil) {
+            self.gotoMainview();
+        }
+        else {
+            let singleTap = UITapGestureRecognizer(target: self, action:        #selector(LoginViewController.tapDetected))
+            viewcontainer.addGestureRecognizer(singleTap)
+        }
     }
     
     @objc func tapDetected() {
@@ -38,7 +47,6 @@ class LoginViewController : UIViewController {
         else{
             
             Model.instance.signIn(email!, password!, { (res) in
-                
                 if(res) {
                     self.gotoMainview();
                 } else {
