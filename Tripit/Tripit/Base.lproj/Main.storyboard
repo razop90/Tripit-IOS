@@ -98,7 +98,7 @@
                                                                                                 <constraint firstAttribute="width" constant="30" id="HIg-0s-3Ls"/>
                                                                                                 <constraint firstAttribute="height" constant="30" id="dLm-MG-9JZ"/>
                                                                                             </constraints>
-                                                                                            <state key="normal" image="like_pressed.png"/>
+                                                                                            <state key="normal" image="like_unpressed.png"/>
                                                                                             <connections>
                                                                                                 <action selector="OnLikeSubmit:" destination="XW7-Qd-WrW" eventType="touchUpInside" id="q2D-pT-lNh"/>
                                                                                                 <action selector="onLikeSubmit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oNZ-NC-Mx3"/>
@@ -179,6 +179,7 @@
                                                 <connections>
                                                     <outlet property="commentsCounter" destination="S4v-ST-IkM" id="fDS-rC-nrw"/>
                                                     <outlet property="descriptionText" destination="7bc-Gs-QD8" id="BgV-jP-iai"/>
+                                                    <outlet property="likeButton" destination="Rs2-j6-4Xv" id="FoA-Ii-zCD"/>
                                                     <outlet property="likesCounter" destination="uKD-Bs-air" id="yQa-6G-58W"/>
                                                     <outlet property="locationText" destination="164-IL-zxv" id="eKY-0j-yMZ"/>
                                                     <outlet property="mainImage" destination="Hic-VG-O5o" id="srT-B0-mEJ"/>
@@ -823,7 +824,7 @@
     <resources>
         <image name="comment.png" width="128" height="128"/>
         <image name="default_profile2.jpg" width="377" height="360"/>
-        <image name="like_pressed.png" width="128" height="128"/>
+        <image name="like_unpressed.png" width="128" height="128"/>
         <image name="marker.png" width="256" height="256"/>
         <image name="no_pic.png" width="800" height="600"/>
         <image name="paper_plane.png" width="30" height="30"/>
