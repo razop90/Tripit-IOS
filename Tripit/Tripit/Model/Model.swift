@@ -28,6 +28,12 @@ class Model {
             for post in data {
                 Post.addNew(database: self.sqlModel.database, post: post)
                
+                //removing all likes and updating the likes collection.
+                Post.removeAllLikes(database: self.sqlModel.database, postId: post.id)
+                for like in post.likes {
+                    Post.addNewLike(database: self.sqlModel.database, postId: post.id, userId: like)
+                }
+                
                 if (post.lastUpdate > lastUpdated) {
                     lastUpdated = post.lastUpdate
                     isUpdated = true
@@ -95,6 +101,10 @@ class Model {
     
     func addLike(_ postId:String, _ userId:String) {
         firebaseModel.addLike(postId, userId)
+    }
+    
+    func removeLike(_ postId:String, _ userId:String) {
+        firebaseModel.removeLike(postId, userId)
     }
     
     func getPost(_ byId:String)->Post?{

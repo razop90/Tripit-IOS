@@ -9,7 +9,20 @@
 import Foundation
 import UIKit
 
+extension UIImage {
+    
+    func opacity(_ value:CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+}
+
 class PostTableViewCell : UITableViewCell {
+    private var lastPostId:String = ""
+    private var lastPostLikes:[String] = [String]()
     
     @IBOutlet var userNameText: UILabel!
     @IBOutlet var locationText: UILabel!
@@ -18,6 +31,7 @@ class PostTableViewCell : UITableViewCell {
     @IBOutlet var likesCounter: UILabel!
     @IBOutlet var commentsCounter: UILabel!
     @IBOutlet var descriptionText: UILabel!
+    @IBOutlet var likeButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +42,10 @@ class PostTableViewCell : UITableViewCell {
     }
     
     public func setPostData(_ post:Post, _ row:Int) {
+        //saving the last post details
+        lastPostId = post.id
+        lastPostLikes = post.likes
+        
         userNameText.text = ""
         locationText.text = post.location
         descriptionText.text = post.description
@@ -37,6 +55,16 @@ class PostTableViewCell : UITableViewCell {
         profileImage?.image = UIImage(named: "default_profile2")
         mainImage!.tag = row
         profileImage!.tag = row
+        
+        //setting a like image depends on the user like state.
+        let user = Model.instance.currentUser()
+        var img = UIImage(named: "like_unpressed")
+        if(user != nil) {
+            if(lastPostLikes.contains(user!.uid)) {
+                  img = UIImage(named: "like_pressed")
+            }
+        }
+        likeButton.setImage(img, for: .normal)
         
         Model.instance.getUserInfo(post.userID, callback: { (info) in
             if info != nil {
@@ -66,6 +94,14 @@ class PostTableViewCell : UITableViewCell {
     }
     
     @IBAction func OnLikeSubmit(_ sender: Any) {
-        
-    }
+        let user = Model.instance.currentUser()
+        if(user != nil) {
+            if(lastPostLikes.contains(user!.uid)) {
+                 Model.instance.removeLike(lastPostId, user!.uid)
+            }
+            else {
+                 Model.instance.addLike(lastPostId, user!.uid)
+            }
+        }
+     }
 }

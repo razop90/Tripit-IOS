@@ -136,7 +136,25 @@ class FirebaseModel {
     }
     
     func addLike(_ postId:String, _ userId:String) {
+        let likesRef = self.ref!.child(Consts.Posts.PostsTableName).child(postId).child(Consts.Posts.LikesTableName)
+    
+        likesRef.child(userId).setValue("")
         
+        //updating the like's post update time
+        self.ref!.child(Consts.Posts.PostsTableName).child(postId).child("lastUpdate").setValue(ServerValue.timestamp())
+    }
+    
+    func removeLike(_ postId:String, _ userId:String) {
+        let likesRef = self.ref!.child(Consts.Posts.PostsTableName).child(postId).child(Consts.Posts.LikesTableName)
+        
+        likesRef.child(userId).removeValue { (error,arg)  in
+            if error != nil {
+                print("error while trying to remove a like")
+            }
+            else {
+                self.ref!.child(Consts.Posts.PostsTableName).child(postId).child("lastUpdate").setValue(ServerValue.timestamp())
+            }
+        }
     }
     
     func saveImage(folderName:String, image:UIImage, callback:@escaping (String?) -> Void) {

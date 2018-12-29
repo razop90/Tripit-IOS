@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tripit/Classes/PostTableViewCell.swift"
-            timestampString = "567712754.572437"
+            timestampString = "567798495.386928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "setPostData(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -72,43 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tripit/Classes/PostTableViewCell.swift"
-            timestampString = "567712754.572505"
+            timestampString = "567798495.387019"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "setPostData(_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Tripit/Classes/PostTableViewCell.swift"
-            timestampString = "567712754.572571"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "setPostData(_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Tripit/Classes/PostTableViewCell.swift"
-            timestampString = "567712754.572637"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "setPostData(_:_:)"
             landmarkType = "7">
             <Locations>
@@ -151,28 +119,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tripit/Model/SqlModel.swift"
-            timestampString = "567732663.8240499"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "init()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Tripit/Classes/Extensions/PostSqlExtension.swift"
-            timestampString = "567732663.824129"
+            timestampString = "567798495.3870929"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "addNew(database:post:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -184,7 +136,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tripit/Classes/Extensions/PostSqlExtension.swift"
-            timestampString = "567732663.824226"
+            timestampString = "567798495.387162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -200,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tripit/Classes/Extensions/PostSqlExtension.swift"
-            timestampString = "567732663.8243099"
+            timestampString = "567798495.387229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "addNew(database:post:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -216,7 +168,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tripit/Classes/Extensions/PostSqlExtension.swift"
-            timestampString = "567732663.824389"
+            timestampString = "567798495.387302"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
@@ -232,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tripit/Classes/Extensions/PostSqlExtension.swift"
-            timestampString = "567732663.824466"
+            timestampString = "567798495.387374"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "addNew(database:post:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -247,13 +199,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tripit/Model/SqlModel.swift"
-            timestampString = "567732663.824542"
+            filePath = "Tripit/Model/FirebaseModel.swift"
+            timestampString = "567798495.3874511"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "init()"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "addComment(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -263,13 +215,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tripit/Model/FirebaseModel.swift"
-            timestampString = "567732663.824612"
+            filePath = "Tripit/Model/Model.swift"
+            timestampString = "567798495.387524"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "addComment(_:_:_:)"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "getAllPosts()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

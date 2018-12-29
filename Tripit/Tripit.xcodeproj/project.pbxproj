@@ -22,6 +22,7 @@
 		82AEE2C321BAA5E1008A01B8 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C221BAA5E1008A01B8 /* MainNavigationController.swift */; };
 		82AEE2C521BAA97B008A01B8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */; };
 		82AEE2C721BACB48008A01B8 /* AddPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AEE2C621BACB48008A01B8 /* AddPostController.swift */; };
+		841638B921D7D7DD00BB8741 /* LikeSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841638B821D7D7DD00BB8741 /* LikeSqlExtension.swift */; };
 		8435D12F21C6CFC6001B1208 /* CommentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435D12E21C6CFC6001B1208 /* CommentsController.swift */; };
 		8435D13321C6ED86001B1208 /* CommentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435D13221C6ED86001B1208 /* CommentViewCell.swift */; };
 		8449A53D21C56A15006A05AC /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449A53C21C56A15006A05AC /* RegisterViewController.swift */; };
@@ -85,6 +86,7 @@
 		82AEE2C221BAA5E1008A01B8 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		82AEE2C421BAA97B008A01B8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		82AEE2C621BACB48008A01B8 /* AddPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostController.swift; sourceTree = "<group>"; };
+		841638B821D7D7DD00BB8741 /* LikeSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeSqlExtension.swift; sourceTree = "<group>"; };
 		8435D12E21C6CFC6001B1208 /* CommentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsController.swift; sourceTree = "<group>"; };
 		8435D13221C6ED86001B1208 /* CommentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewCell.swift; sourceTree = "<group>"; };
 		8449A53C21C56A15006A05AC /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				844D86B421D641DB00FA8174 /* PostSqlExtension.swift */,
 				844D86BA21D6ACDD00FA8174 /* CommentSqlExtension.swift */,
 				844D86BC21D6CE3A00FA8174 /* UserInfoSqlExtension.swift */,
+				841638B821D7D7DD00BB8741 /* LikeSqlExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				82093AC421BA81AE000B9DF3 /* Model.swift in Sources */,
 				8449A53D21C56A15006A05AC /* RegisterViewController.swift in Sources */,
 				844D86B521D641DB00FA8174 /* PostSqlExtension.swift in Sources */,
+				841638B921D7D7DD00BB8741 /* LikeSqlExtension.swift in Sources */,
 				8435D13321C6ED86001B1208 /* CommentViewCell.swift in Sources */,
 				844D86B921D651D000FA8174 /* SqlModel.swift in Sources */,
 				82AEE2C321BAA5E1008A01B8 /* MainNavigationController.swift in Sources */,

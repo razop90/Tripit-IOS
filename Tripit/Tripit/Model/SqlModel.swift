@@ -30,6 +30,7 @@ class SqlModel {
     func createTables() {
         Post.createTable(database: database);
         Post.Comment.createTable(database: database);
+        Post.createLikesTable(database: database)
         UserInfo.createTable(database: database);
         LastUpdateDates.createTable(database: database);
     }
@@ -37,6 +38,7 @@ class SqlModel {
     func dropTables() {
         Post.drop(database: database)
         Post.Comment.drop(database: database)
+        Post.dropLikesTable(database: database)
         UserInfo.drop(database: database)
         LastUpdateDates.drop(database: database)
     }

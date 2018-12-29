@@ -48,6 +48,9 @@ extension Post {
                 let comments = Post.Comment.getAll(database: database, postID: post.id)
                 post.comments = comments
                 
+                let likes = Post.getLikes(database: database, postId: post.id)
+                post.likes = likes
+                
                 data.append(post)
             }
         }
