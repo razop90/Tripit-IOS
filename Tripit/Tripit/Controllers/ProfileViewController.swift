@@ -31,5 +31,7 @@ class ProfileViewController: UIViewController {
         }
         //Navigate to the main view
         present(mainNavigationVC, animated: true, completion: nil)
+
     }
+    
 }
