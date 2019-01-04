@@ -101,7 +101,6 @@
                                                                                             <state key="normal" image="like_unpressed.png"/>
                                                                                             <connections>
                                                                                                 <action selector="OnLikeSubmit:" destination="XW7-Qd-WrW" eventType="touchUpInside" id="q2D-pT-lNh"/>
-                                                                                                <action selector="onLikeSubmit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oNZ-NC-Mx3"/>
                                                                                             </connections>
                                                                                         </button>
                                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dg-Fg-uhv" userLabel="commentButton">

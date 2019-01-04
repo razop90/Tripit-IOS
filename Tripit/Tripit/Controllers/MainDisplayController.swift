@@ -56,8 +56,4 @@ class  MainDisplayController : UIViewController, UITableViewDelegate, UITableVie
             commentsController.comments = post.comments
         }
     }
-    
-    @IBAction func onLikeSubmit(_ sender: Any) {
-        
-    }
 }
