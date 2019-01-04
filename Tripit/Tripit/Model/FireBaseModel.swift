@@ -39,6 +39,20 @@ class FirebaseModel {
         })
     }
     
+    func getAllPosts(userId:String, callback:@escaping ([Post])->Void) {
+        let stRef = ref.child("Posts")
+        let fbQuery = stRef.queryOrdered(byChild: "userID").queryEqual(toValue: userId)
+        fbQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+            var data = [Post]()
+            if let value = snapshot.value as? [String:Any] {
+                for (_, json) in value{
+                    data.append(Post(json: json as! [String : Any]))
+                }
+            }
+            callback(data)
+        })
+    }
+    
     func getAllPostsFromDate(from:Double, callback:@escaping ([Post])->Void) {
         let stRef = ref.child("Posts")
         let fbQuery = stRef.queryOrdered(byChild: "lastUpdate").queryStarting(atValue: from)
@@ -129,7 +143,7 @@ class FirebaseModel {
     func addComment(_ postId:String, _ comment:Post.Comment, _ completionBlock:@escaping (_ errorMessage:String?) -> Void = {_  in}) {
         let newCommentRef = self.ref!.child(Consts.Posts.PostsTableName).child(postId).child(Consts.Posts.CommentsTableName).childByAutoId()
         comment.id = newCommentRef.key!
-
+        
         newCommentRef.setValue(comment.toJson())
         //updating the comment's post update time
         self.ref!.child(Consts.Posts.PostsTableName).child(postId).child("lastUpdate").setValue(ServerValue.timestamp())
@@ -137,7 +151,7 @@ class FirebaseModel {
     
     func addLike(_ postId:String, _ userId:String) {
         let likesRef = self.ref!.child(Consts.Posts.PostsTableName).child(postId).child(Consts.Posts.LikesTableName)
-    
+        
         likesRef.child(userId).setValue("")
         
         //updating the like's post update time
@@ -207,7 +221,7 @@ class FirebaseModel {
                 callback(false)
             }
         }
-    }    
+    }
     
     func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
@@ -224,6 +238,13 @@ class FirebaseModel {
         return Auth.auth().currentUser
     }
     
+    func signOut(_ callback:@escaping () -> Void) {
+        do {
+            try Auth.auth().signOut()
+            callback()
+        } catch {
+            print("Error while signing out!")
+        }
+    }
     
-   
 }

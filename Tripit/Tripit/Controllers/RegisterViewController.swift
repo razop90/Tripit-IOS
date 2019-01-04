@@ -13,8 +13,14 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordFiled: UITextField!
     @IBOutlet weak var repasswordFiled: UITextField!
     @IBOutlet var viewcontainer: UIView!
+    @IBOutlet var buisyIndicaitor: UIActivityIndicatorView!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.buisyIndicaitor.isHidden = true
+        self.view.isUserInteractionEnabled = true
+        
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.tapDetected))
         viewcontainer.addGestureRecognizer(singleTap)
     }
@@ -45,11 +51,18 @@ class RegisterViewController: UIViewController {
             }
         }
         else{
+            buisyIndicaitor.startAnimating()
+            view.isUserInteractionEnabled = false
+            buisyIndicaitor.isHidden = false
             
             Model.instance.signUp(email!, password!, { (res) in
                 if(res) {
                     self.gotoMainview()
                 } else {
+                    self.buisyIndicaitor.stopAnimating()
+                    self.view.isUserInteractionEnabled = true
+                    self.buisyIndicaitor.isHidden = true
+                    
                     self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
                 }
             })

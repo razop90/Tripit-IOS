@@ -32,6 +32,8 @@
 		844D86B921D651D000FA8174 /* SqlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D86B821D651D000FA8174 /* SqlModel.swift */; };
 		844D86BB21D6ACDD00FA8174 /* CommentSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D86BA21D6ACDD00FA8174 /* CommentSqlExtension.swift */; };
 		844D86BD21D6CE3A00FA8174 /* UserInfoSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D86BC21D6CE3A00FA8174 /* UserInfoSqlExtension.swift */; };
+		84A27F3121DF8550008C3FB2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A27F3021DF8550008C3FB2 /* ProfileViewController.swift */; };
+		84A27F3521DF9EEE008C3FB2 /* unnamed-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A27F3421DF9EED008C3FB2 /* unnamed-2.png */; };
 		84B75F2421C42C1700F4D70E /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B75F2321C42C1700F4D70E /* PostTableViewCell.swift */; };
 		84B75F2621C43FD500F4D70E /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B75F2521C43FD500F4D70E /* NotificationModel.swift */; };
 		84B75F2F21C460C500F4D70E /* default_profile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84B75F2D21C460C500F4D70E /* default_profile.jpg */; };
@@ -96,6 +98,8 @@
 		844D86B821D651D000FA8174 /* SqlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlModel.swift; sourceTree = "<group>"; };
 		844D86BA21D6ACDD00FA8174 /* CommentSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSqlExtension.swift; sourceTree = "<group>"; };
 		844D86BC21D6CE3A00FA8174 /* UserInfoSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSqlExtension.swift; sourceTree = "<group>"; };
+		84A27F3021DF8550008C3FB2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		84A27F3421DF9EED008C3FB2 /* unnamed-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "unnamed-2.png"; path = "../../../../../Desktop/unnamed-2.png"; sourceTree = "<group>"; };
 		84B75F2321C42C1700F4D70E /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		84B75F2521C43FD500F4D70E /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		84B75F2D21C460C500F4D70E /* default_profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default_profile.jpg; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 				8243A36521BAD6E4001C7108 /* MainDisplayController.swift */,
 				8449A53C21C56A15006A05AC /* RegisterViewController.swift */,
 				8435D12E21C6CFC6001B1208 /* CommentsController.swift */,
+				84A27F3021DF8550008C3FB2 /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -266,6 +271,7 @@
 				84B75F2D21C460C500F4D70E /* default_profile.jpg */,
 				84B75F3F21C4706F00F4D70E /* comment.png */,
 				84B75F3E21C4706F00F4D70E /* like_pressed.png */,
+				84A27F3421DF9EED008C3FB2 /* unnamed-2.png */,
 				84B75F3D21C4706E00F4D70E /* like_unpressed.png */,
 				84B75F3B21C46F5B00F4D70E /* no_pic.png */,
 				84B75F2E21C460C500F4D70E /* default_profile2.jpg */,
@@ -402,6 +408,7 @@
 				84B75F3C21C46F5C00F4D70E /* no_pic.png in Resources */,
 				84B75F3021C460C500F4D70E /* default_profile2.jpg in Resources */,
 				84B75F3A21C46E9D00F4D70E /* marker.png in Resources */,
+				84A27F3521DF9EEE008C3FB2 /* unnamed-2.png in Resources */,
 				820D19BF21B2D96A0026655D /* Main.storyboard in Resources */,
 				84B75F2F21C460C500F4D70E /* default_profile.jpg in Resources */,
 				84B75F4221C4706F00F4D70E /* comment.png in Resources */,
@@ -532,6 +539,7 @@
 				8449A53D21C56A15006A05AC /* RegisterViewController.swift in Sources */,
 				844D86B521D641DB00FA8174 /* PostSqlExtension.swift in Sources */,
 				841638B921D7D7DD00BB8741 /* LikeSqlExtension.swift in Sources */,
+				84A27F3121DF8550008C3FB2 /* ProfileViewController.swift in Sources */,
 				8435D13321C6ED86001B1208 /* CommentViewCell.swift in Sources */,
 				844D86B921D651D000FA8174 /* SqlModel.swift in Sources */,
 				82AEE2C321BAA5E1008A01B8 /* MainNavigationController.swift in Sources */,

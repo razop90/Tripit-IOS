@@ -9,6 +9,7 @@
 import Foundation
 
 class NotificationModel{
+    static let userPostsListNotification = Notification<[Post]>("notification.userpostsdata")
     static let postsListNotification = Notification<[Post]>("notification.postsdata")
     static let postsCommentstNotification = Notification<[Post.Comment]>("notification.postcommentsdata")
     static let userInfoNotification = Notification<UserInfo>("notification.userinfo")

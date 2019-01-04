@@ -29,10 +29,15 @@ extension Post {
         }
     }
     
-    static func getAll(database: OpaquePointer?)->[Post] {
+    static func getAll(database: OpaquePointer?, userId:String? = nil)->[Post] {
         var sqlite3_stmt: OpaquePointer? = nil
         var data = [Post]()
-        if (sqlite3_prepare_v2(database,"SELECT * from POSTS;",-1,&sqlite3_stmt,nil)
+        var query = "SELECT * from POSTS;"
+        if(userId != nil) {
+            query = "SELECT * from POSTS where USERID = '" + userId! + "' ;"
+        }
+        
+        if (sqlite3_prepare_v2(database,query,-1,&sqlite3_stmt,nil)
             == SQLITE_OK){
             while(sqlite3_step(sqlite3_stmt) == SQLITE_ROW){
                 let ID = String(cString:sqlite3_column_text(sqlite3_stmt,0)!)
@@ -68,7 +73,7 @@ extension Post {
             let imageUrl = post.imageUrl?.cString(using: .utf8)
             let creationDate = post.creationDate
             let lastUpdate = post.lastUpdate
-
+            
             sqlite3_bind_text(sqlite3_stmt, 1, id,-1,nil);
             sqlite3_bind_text(sqlite3_stmt, 2, userID,-1,nil);
             sqlite3_bind_text(sqlite3_stmt, 3, location,-1,nil);
