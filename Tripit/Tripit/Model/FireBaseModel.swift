@@ -224,6 +224,13 @@ class FirebaseModel {
         return Auth.auth().currentUser
     }
     
-    
+    func signOut(_ callback:@escaping () -> Void) {
+        do {
+            try Auth.auth().signOut()
+            callback()
+        } catch {
+            print("Error while signing out!")
+        }
+    }   
    
 }

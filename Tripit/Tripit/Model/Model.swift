@@ -155,6 +155,10 @@ class Model {
         firebaseModel.signIn(email, password, callback)
     }
     
+    func signOut(_ callback:@escaping () -> Void) {
+        firebaseModel.signOut(callback)
+    }
+    
     func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
     {
         firebaseModel.signUp(email, password,callback)

@@ -686,7 +686,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DVQ-Tg-wzf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3306" y="-84"/>
+            <point key="canvasLocation" x="-3307" y="-189"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="hv4-Bw-V26">
@@ -705,16 +705,15 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Profile" id="qLs-Gl-foa">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="I9N-OS-adR">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3K2-vN-k4R">
-                                                <rect key="frame" x="20" y="7" width="92" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Back"/>
-                                                <connections>
-                                                    <action selector="TappedOnBackToMainController:" destination="qVx-Nm-EM9" eventType="touchUpInside" id="Jke-Ot-vcL"/>
-                                                </connections>
-                                            </button>
-                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="dbQ-Qv-2n7">
+                                            <connections>
+                                                <action selector="TappedOnBackToMainController:" destination="qVx-Nm-EM9" id="gzh-qT-uDA"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="u6C-C6-oVj">
+                                            <connections>
+                                                <action selector="TappedOnSignOut:" destination="qVx-Nm-EM9" id="AcN-0Q-QPk"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -883,19 +882,29 @@
                                         </tableViewCellContentView>
                                         <viewLayoutGuide key="safeArea" id="hNB-BW-3k2"/>
                                         <connections>
-                                            <outlet property="mainImage" destination="ABD-Ja-5Ae" id="crD-oW-XHN"/>
+                                            <outlet property="commentsCounter" destination="f5L-W9-LXp" id="n6w-qv-yaF"/>
+                                            <outlet property="descriptionText" destination="YS2-uE-vM3" id="jqC-SE-prf"/>
+                                            <outlet property="likeButton" destination="wd1-9a-CRw" id="xBw-zO-9xn"/>
+                                            <outlet property="likesCounter" destination="VqX-Q2-vD0" id="bZa-dc-TD2"/>
+                                            <outlet property="locationText" destination="SqS-UZ-c28" id="ma9-j7-gU4"/>
+                                            <outlet property="mainImage" destination="ABD-Ja-5Ae" id="k21-v5-pPi"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Myb-Zp-C0m"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="cCq-Tj-RyU"/>
+                                    <outlet property="dataSource" destination="qVx-Nm-EM9" id="lKI-Me-rYm"/>
+                                    <outlet property="delegate" destination="qVx-Nm-EM9" id="6rZ-4y-Irt"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BMP-Nw-kch"/>
                     </view>
+                    <connections>
+                        <outlet property="postsTableView" destination="0v6-Ao-FQW" id="o4A-Il-A7J"/>
+                        <outlet property="profileImageView" destination="c51-ck-5hJ" id="T3i-Pn-FfU"/>
+                        <outlet property="userNameText" destination="iBA-aa-yDp" id="FwH-VJ-Lwu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8z-O5-7vv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1013,7 +1022,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Sy-zB-N6J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4074" y="-84"/>
+            <point key="canvasLocation" x="-4075" y="-189"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="lpr-QV-4ND">

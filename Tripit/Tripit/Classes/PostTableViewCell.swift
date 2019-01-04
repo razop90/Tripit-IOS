@@ -35,26 +35,26 @@ class PostTableViewCell : UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
-        self.profileImage.clipsToBounds = true
-        self.profileImage.layer.borderWidth = 3.0
+        
+        if(self.profileImage != nil && self.profileImage.image != nil) {
+            // Initialization code
+            self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
+            self.profileImage.clipsToBounds = true
+         self.profileImage.layer.borderWidth = 3.0
+        }
     }
     
-    public func setPostData(_ post:Post, _ row:Int) {
+    public func setPostData(_ post:Post, _ row:Int, _ isUserSet:Bool = true) {
         //saving the last post details
         lastPostId = post.id
         lastPostLikes = post.likes
         
-        userNameText.text = ""
         locationText.text = post.location
         descriptionText.text = post.description
         likesCounter.text = String(post.likes.count)
         commentsCounter.text = String(post.comments.count)
-        mainImage?.image = UIImage(named: "no_pic")
-        profileImage?.image = UIImage(named: "default_profile2")
+        mainImage?.image = UIImage(named: "no_pic")      
         mainImage!.tag = row
-        profileImage!.tag = row
         
         //setting a like image depends on the user like state.
         let user = Model.instance.currentUser()
@@ -66,21 +66,27 @@ class PostTableViewCell : UITableViewCell {
         }
         likeButton.setImage(img, for: .normal)
         
-        Model.instance.getUserInfo(post.userID, callback: { (info) in
-            if info != nil {
-                self.userNameText.text = info?.displayName
+        if(isUserSet) {
+            userNameText.text = ""
+            profileImage?.image = UIImage(named: "default_profile2")
+            profileImage!.tag = row
             
-                if info?.profileImageUrl != "" {
-                    Model.instance.getImage(url: info!.profileImageUrl!) { (image:UIImage?) in
-                        if (self.profileImage!.tag == row){
-                            if image != nil {
-                                self.profileImage?.image = image!
+            Model.instance.getUserInfo(post.userID, callback: { (info) in
+                if info != nil {
+                    self.userNameText.text = info?.displayName
+            
+                    if info?.profileImageUrl != "" {
+                        Model.instance.getImage(url: info!.profileImageUrl!) { (image:UIImage?) in
+                            if (self.profileImage!.tag == row){
+                                if image != nil {
+                                    self.profileImage?.image = image!
+                                }
                             }
                         }
                     }
                 }
-            }
-        })
+            })
+        }
         
         if post.imageUrl != "" {
             Model.instance.getImage(url: post.imageUrl!) { (image:UIImage?) in
