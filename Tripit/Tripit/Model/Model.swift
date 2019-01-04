@@ -15,43 +15,82 @@ class Model {
     
     var firebaseModel = FirebaseModel();
     var sqlModel = SqlModel();
+    private var userId:String? = nil
     
     private init(){
     }
     
     func getAllPosts() {
         var lastUpdated = Post.getLastUpdateDate(database: sqlModel.database)
-        lastUpdated += 1;
-        var isUpdated = false
+        lastUpdated += 1
         
         firebaseModel.getAllPostsFromDate(from:lastUpdated){ (data:[Post]) in
-            for post in data {
-                Post.addNew(database: self.sqlModel.database, post: post)
-               
-                //removing all likes and updating the likes collection.
-                Post.removeAllLikes(database: self.sqlModel.database, postId: post.id)
-                for like in post.likes {
-                    Post.addNewLike(database: self.sqlModel.database, postId: post.id, userId: like)
+            self.sqlHandler(data: data) {(isUpdated:Bool, curUserUpdated:Bool) in
+                if(isUpdated) {
+                    self.getAllPostsFromLocalAndNotify()
+                    
+                    if(curUserUpdated && self.userId != nil) {
+                        self.getAllPostsByUserAndNotify(_userId: self.userId!)
+                    }
                 }
-                
-                if (post.lastUpdate > lastUpdated) {
-                    lastUpdated = post.lastUpdate
-                    isUpdated = true
-                }
-            }
-            
-            if(isUpdated) {
-                Post.setLastUpdateDate(database: self.sqlModel.database, date: lastUpdated)
-                self.getAllPostsFromLocalAndNotify()
             }
         }
         
         getAllPostsFromLocalAndNotify()
     }
     
+    func getAllPosts(userId:String) {
+        self.userId = userId
+        
+        firebaseModel.getAllPosts(userId: userId){ (data:[Post]) in
+            self.sqlHandler(data: data) {(isUpdated:Bool, curUserUpdated:Bool) in
+                self.getAllPostsByUserAndNotify(_userId: userId)
+            }
+        }
+        
+        getAllPostsByUserAndNotify(_userId: userId)
+    }
+    
+    private func sqlHandler(data:[Post], callback: (Bool, Bool) -> Void) {
+        var lastUpdated = Post.getLastUpdateDate(database: sqlModel.database)
+        lastUpdated += 1
+        var isUpdated = false
+        var currUserUpdated = false
+        
+        for post in data {
+            Post.addNew(database: self.sqlModel.database, post: post)
+            
+            //removing all likes and updating the likes collection.
+            Post.removeAllLikes(database: self.sqlModel.database, postId: post.id)
+            for like in post.likes {
+                Post.addNewLike(database: self.sqlModel.database, postId: post.id, userId: like)
+            }
+            
+            if(post.lastUpdate > lastUpdated) {
+                lastUpdated = post.lastUpdate
+                isUpdated = true
+            }
+            
+            if(self.userId != nil && post.userID == self.userId!) {
+                currUserUpdated = true
+            }
+        }
+        
+        if(isUpdated) {
+            Post.setLastUpdateDate(database: self.sqlModel.database, date: lastUpdated)
+        }
+        
+        callback(isUpdated, currUserUpdated)
+    }
+    
     private func getAllPostsFromLocalAndNotify(){
         let postData = Post.getAll(database: self.sqlModel.database)
         NotificationModel.postsListNotification.notify(data: postData)
+    }
+    
+    func getAllPostsByUserAndNotify(_userId:String) {
+        let postData = Post.getAll(database: self.sqlModel.database, userId: _userId)
+        NotificationModel.userPostsListNotification.notify(data: postData)
     }
     
     func getPostComments(_ postId:String) {
@@ -73,9 +112,9 @@ class Model {
             if(info != nil) {
                 var lastUpdated = UserInfo.getLastUpdateDate(database: self.sqlModel.database)
                 lastUpdated += 1;
-            
+                
                 UserInfo.addNew(database: self.sqlModel.database, info: info!)
-                    
+                
                 if (info!.timestamp > lastUpdated) {
                     lastUpdated = info!.timestamp
                     UserInfo.setLastUpdateDate(database: self.sqlModel.database, date: lastUpdated)
@@ -111,7 +150,7 @@ class Model {
         return firebaseModel.getPost(byId:byId)
     }
     
-    func getImage(url:String, callback:@escaping (UIImage?)->Void){        
+    func getImage(url:String, callback:@escaping (UIImage?)->Void){
         //1. try to get the image from local store
         let _url = URL(string: url)
         let localImageName = _url!.lastPathComponent

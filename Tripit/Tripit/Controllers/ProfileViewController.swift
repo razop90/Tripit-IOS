@@ -33,25 +33,26 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             Model.instance.getUserInfo(user!.uid, callback: { (info) in
                 if info != nil {
                     self.userNameText.text = info?.displayName
-                
+                    
                     if info?.profileImageUrl != "" {
                         Model.instance.getImage(url: info!.profileImageUrl!) { (image:UIImage?) in
-                                if image != nil {
-                                    self.profileImageView?.image = image!
+                            if image != nil {
+                                self.profileImageView?.image = image!
                             }
                         }
                     }
                 }
             })
+            
+            postsListener = NotificationModel.userPostsListNotification.observe(){
+                (data:Any) in
+                let newPosts = data as! [Post]
+                self.posts = newPosts.sorted { $0.creationDate > $1.creationDate }
+                self.postsTableView.reloadData()
+            }
+            
+            Model.instance.getAllPosts(userId: user!.uid)
         }
-        
-        postsListener = NotificationModel.postsListNotification.observe(){
-            (data:Any) in
-            let newPosts = data as! [Post]
-            self.posts = newPosts.sorted { $0.creationDate > $1.creationDate }
-            self.postsTableView.reloadData()
-        }
-        Model.instance.getAllPosts()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,7 +69,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func TappedOnBackToMainController(_ sender: Any) {
-         self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func TappedOnSignOut(_ sender: Any) {
