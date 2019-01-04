@@ -24,12 +24,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tripit/Controllers/LoginViewController.swift"
-            timestampString = "568310733.994344"
+            timestampString = "568325873.295416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "gotoMainview()"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "OnRegisterTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
