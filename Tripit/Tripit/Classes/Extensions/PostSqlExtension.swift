@@ -13,7 +13,7 @@ extension Post {
     
     static func createTable(database: OpaquePointer?)  {
         var errormsg: UnsafeMutablePointer<Int8>? = nil
-        let res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS POSTS (ID TEXT PRIMARY KEY, USERID TEXT, LOCATION TEXT, DESCRIPTION TEXT, IMAGEURL TEXT, CREATION_DATE DOUBLE, LAST_UPDATE DOUBLE)", nil, nil, &errormsg);
+        let res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS POSTS (ID TEXT PRIMARY KEY, USERID TEXT, LOCATION TEXT, DESCRIPTION TEXT, IMAGEURL TEXT, CREATION_DATE DOUBLE, LAST_UPDATE DOUBLE, IS_DELETED INTEGER)", nil, nil, &errormsg);
         if(res != 0){
             print("error creating table");
             return
@@ -63,9 +63,24 @@ extension Post {
         return data
     }
     
+    static func delete(database: OpaquePointer?, postId:String) {
+        var sqlite3_stmt: OpaquePointer? = nil
+        let query = "DELETE FROM POSTS WHERE ID = '" + postId + "' ;"
+        
+        if (sqlite3_prepare_v2(database,query,-1, &sqlite3_stmt,nil) == SQLITE_OK){
+            if sqlite3_step(sqlite3_stmt) == SQLITE_DONE {
+                print("Successfully deleted row.")
+            } else {
+                print("Could not delete row.")
+            }
+        } else {
+            print("DELETE statement could not be prepared")
+        }
+    }
+    
     static func addNew(database: OpaquePointer?, post:Post) {
         var sqlite3_stmt: OpaquePointer? = nil
-        if (sqlite3_prepare_v2(database,"INSERT OR REPLACE INTO POSTS(ID, USERID, LOCATION, DESCRIPTION, IMAGEURL,CREATION_DATE, LAST_UPDATE) VALUES (?,?,?,?,?,?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
+        if (sqlite3_prepare_v2(database,"INSERT OR REPLACE INTO POSTS(ID, USERID, LOCATION, DESCRIPTION, IMAGEURL,CREATION_DATE, LAST_UPDATE, IS_DELETED) VALUES (?,?,?,?,?,?,?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
             let id = post.id.cString(using: .utf8)
             let userID = post.userID.cString(using: .utf8)
             let location = post.location.cString(using: .utf8)
@@ -73,6 +88,7 @@ extension Post {
             let imageUrl = post.imageUrl?.cString(using: .utf8)
             let creationDate = post.creationDate
             let lastUpdate = post.lastUpdate
+            let isDeleted = Int32(post.isDeleted)
             
             sqlite3_bind_text(sqlite3_stmt, 1, id,-1,nil);
             sqlite3_bind_text(sqlite3_stmt, 2, userID,-1,nil);
@@ -81,6 +97,7 @@ extension Post {
             sqlite3_bind_text(sqlite3_stmt, 5, imageUrl,-1,nil);
             sqlite3_bind_double(sqlite3_stmt, 6, creationDate);
             sqlite3_bind_double(sqlite3_stmt, 7, lastUpdate);
+            sqlite3_bind_int(sqlite3_stmt, 8, isDeleted);
             
             //saving post's comments
             for comment in post.comments {

@@ -85,22 +85,51 @@ class FirebaseModel {
         })
     }
     
-    func addNewPost(_ post:Post, _ image:UIImage?, _ completionBlock:@escaping (_ url:String?) -> Void = {_  in}) {
+    //updating or creating a post
+    func updatePost(_ post:Post, _ image:UIImage?, _ isImageUpdated:Bool, _ completionBlock:@escaping (_ url:String?) -> Void = {_  in}) {
         
         if image != nil {
-            saveImage(folderName: Consts.Posts.ImagesFolderName, image: image!) { (url:String?) in
-                if url != nil {
-                    post.imageUrl = url!
+            if(isImageUpdated) { //uploading an image
+                saveImage(folderName: Consts.Posts.ImagesFolderName, image: image!) { (url:String?) in
+                    if(post.id == "") {
+                        if url != nil {
+                            post.imageUrl = url!
+                        }
+                        
+                        let postRef = self.ref!.child(Consts.Posts.PostsTableName).childByAutoId()
+                        post.id = postRef.key!
+                        
+                        postRef.setValue(post.toJson())
+                    } else {
+                        self.updatePostParameters(post, true, url)
+                    }
+                    
+                    completionBlock(url)
                 }
+            } else if(post.id != "") { //no need of uploading an image and it's not a new post
+                updatePostParameters(post, false)
                 
-                let newPostRef = self.ref!.child(Consts.Posts.PostsTableName).childByAutoId()
-                post.id = newPostRef.key!
-                
-                newPostRef.setValue(post.toJson())
-                
-                completionBlock(url)
+                completionBlock(post.imageUrl)
+            } else { //nothing to add or update
+                completionBlock("")
             }
         }
+    }
+    
+    private func updatePostParameters(_ post:Post, _ saveImage:Bool, _ newImageUrl:String? = "") {
+        self.ref!.child(Consts.Posts.PostsTableName).child(post.id).child("location").setValue(post.location)
+        self.ref!.child(Consts.Posts.PostsTableName).child(post.id).child("description").setValue(post.description)
+        if(saveImage && post.imageUrl != nil && newImageUrl != nil) {
+            deleteImage(post.imageUrl!)
+            self.ref!.child(Consts.Posts.PostsTableName).child(post.id).child("imageUrl").setValue(newImageUrl!)
+        }
+        
+        self.ref!.child(Consts.Posts.PostsTableName).child(post.id).child("lastUpdate").setValue(ServerValue.timestamp())
+    }
+    
+    func setPostAsDeleted(_ postId:String) {
+        self.ref!.child(Consts.Posts.PostsTableName).child(postId).child("isDeleted").setValue(1)
+        self.ref!.child(Consts.Posts.PostsTableName).child(postId).child("lastUpdate").setValue(ServerValue.timestamp())
     }
     
     func addUserInfo(_ userInfo:UserInfo, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
@@ -117,6 +146,25 @@ class FirebaseModel {
         else {
             self.ref!.child(Consts.Posts.UserInfoTableName).child(userInfo.uid).setValue(userInfo.toJson())
             completionBlock(true)
+        }
+    }
+    
+    func updateUserInfo(_ userId:String, _ preImageUrl:String?, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
+        if image != nil {
+            saveImage(folderName: Consts.Posts.ProfileImagesFolderName, image: image!) { (url:String?) in
+                if url != nil {
+                    if (preImageUrl != nil) {
+                        self.deleteImage(preImageUrl!)
+                    }
+                    self.ref!.child(Consts.Posts.UserInfoTableName).child(userId).child("profileImageUrl").setValue(url)
+                    completionBlock(true)
+                } else {
+                    completionBlock(false)
+                }
+            }
+        }
+        else {
+            completionBlock(false)
         }
     }
     
@@ -187,6 +235,18 @@ class FirebaseModel {
                 }
                 print("url: \(downloadURL)")
                 callback(downloadURL.absoluteString)
+            }
+        }
+    }
+    
+    func deleteImage(_ imageUrl:String) {
+        let desertRef = Storage.storage().reference(forURL: imageUrl)
+        
+        desertRef.delete { error in
+            if error != nil {
+                print("error while trying to delete an image")
+            } else {
+                print("image deleted")
             }
         }
     }

@@ -17,7 +17,7 @@ class Model {
     var sqlModel = SqlModel();
     private var userId:String? = nil
     
-    private init(){
+    private init() {
     }
     
     func getAllPosts() {
@@ -58,18 +58,25 @@ class Model {
         var currUserUpdated = false
         
         for post in data {
-            Post.addNew(database: self.sqlModel.database, post: post)
-            
-            //removing all likes and updating the likes collection.
+            //removing all likes
             Post.removeAllLikes(database: self.sqlModel.database, postId: post.id)
-            for like in post.likes {
-                Post.addNewLike(database: self.sqlModel.database, postId: post.id, userId: like)
+            
+            if(post.isDeleted == 1) {
+                Post.delete(database: self.sqlModel.database, postId: post.id)
+            } else {
+                Post.addNew(database: self.sqlModel.database, post: post)
+               
+                //updating the likes collection
+                for like in post.likes {
+                    Post.addNewLike(database: self.sqlModel.database, postId: post.id, userId: like)
+                }
             }
             
             if(post.lastUpdate > lastUpdated) {
                 lastUpdated = post.lastUpdate
                 isUpdated = true
             }
+           
             
             if(self.userId != nil && post.userID == self.userId!) {
                 currUserUpdated = true
@@ -99,12 +106,20 @@ class Model {
         })
     }
     
-    func addNewPost(_ post:Post, _ image:UIImage, _ completionBlock:@escaping (_ url:String?) -> Void = {_  in}){
-        firebaseModel.addNewPost(post, image, completionBlock)
+    func updatePost(_ post:Post, _ image:UIImage, _ isImageUpdated:Bool, _ completionBlock:@escaping (_ url:String?) -> Void = {_  in}){
+        firebaseModel.updatePost(post, image, isImageUpdated, completionBlock)
+    }
+    
+    func setPostAsDeleted(_ postId:String) {
+         firebaseModel.setPostAsDeleted(postId)
     }
     
     func addUserInfo(_ userInfo:UserInfo, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
         firebaseModel.addUserInfo(userInfo, image, completionBlock)
+    }
+    
+    func updateUserInfo(_ userId:String, _ preImageUrl:String?, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
+       firebaseModel.updateUserInfo(userId, preImageUrl, image, completionBlock)
     }
     
     func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
