@@ -32,6 +32,7 @@ class PostTableViewCell : UITableViewCell {
     @IBOutlet var commentsCounter: UILabel!
     @IBOutlet var descriptionText: UILabel!
     @IBOutlet var likeButton: UIButton!
+    @IBOutlet var creationDateText: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,6 +50,7 @@ class PostTableViewCell : UITableViewCell {
         lastPostId = post.id
         lastPostLikes = post.likes
         
+        creationDateText.text = post.creationDateStringFormat
         locationText.text = post.location
         descriptionText.text = post.description
         likesCounter.text = String(post.likes.count)

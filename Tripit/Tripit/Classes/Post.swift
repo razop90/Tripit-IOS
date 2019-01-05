@@ -13,13 +13,14 @@ import Firebase
 class Post {
     var id:String
     let userID:String
-    let location:String
-    let description:String
+    var location:String
+    var description:String
     var creationDateStringFormat:String
     var creationDate:Double
     var lastUpdate:Double
     var imageUrl:String?
     var likes:[String] //contains user id's
+    var isDeleted:Int //0 for false, 1 for true
     var comments:[Comment]
     
     init(_userID:String, _id:String, _location:String, _description:String, _creationDate:Double = 0, _imageUrl:String? = nil, _lastUpdate:Double = 0){
@@ -33,6 +34,7 @@ class Post {
         creationDate = _creationDate
         creationDateStringFormat = Consts.General.convertTimestampToStringDate(self.creationDate)
         lastUpdate = _lastUpdate
+        isDeleted = 0
     }
     
     init(json:[String:Any]) {
@@ -41,6 +43,7 @@ class Post {
         location = json["location"] as! String
         description = json["description"] as! String
         imageUrl = json["imageUrl"] as? String
+        isDeleted = json["isDeleted"] as? Int ?? 0
         likes = [String]()
         comments = [Comment]()
         
@@ -85,6 +88,7 @@ class Post {
         json["userID"] = userID
         json["location"] = location
         json["description"] = description
+        json["isDeleted"] = isDeleted
         json["imageUrl"] = imageUrl ?? ""
         json["creationDate"] = ServerValue.timestamp()
         json["lastUpdate"] = ServerValue.timestamp()
@@ -93,7 +97,7 @@ class Post {
         
         return json
     }
-    
+
     private func likesToJson() -> [String:Any] {
         var array:[String:Any] = [String:Any]()
         
